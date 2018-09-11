@@ -8,7 +8,7 @@ const SALT = 10
 
 
 let schema = new Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   //every email must be unique on the database
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
