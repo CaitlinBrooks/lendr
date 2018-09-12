@@ -33,5 +33,9 @@ export default new Vuex.Store({
     lendConfirm() {
 
     },
+    //once item is returned we can move it to history / remove it from active lends
+    deleteLend() {
+
+    },
   }
 })
