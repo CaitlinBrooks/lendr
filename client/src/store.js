@@ -26,7 +26,7 @@ export default new Vuex.Store({
 
     },
     //start a new lend
-    newLend() {
+    addLend() {
 
     },
     //confirm lend with two parties, lender and lendee, needs two id's and two bools (we think)
