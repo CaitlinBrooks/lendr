@@ -32,9 +32,9 @@ router.post('/auth/register', (req, res) => {
 })
 
 router.post('/auth/login', (req, res) => {
-  //FIND A USER BASED ON PROVIDED EMAIL
+  //FIND A USER BASED ON PROVIDED NAME
   Users.findOne({
-    email: req.body.email
+    name: req.body.name
   })
     .then(user => {
       if (!user) {
