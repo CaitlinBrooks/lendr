@@ -1,6 +1,6 @@
 <template>
     <div class="Profile">
-        <h1>THIS IS THE PROFILE PAGE!</h1>
+        <h1>Welcome, {{this.user.name}}</h1>
     </div>
 </template>
 
@@ -11,7 +11,11 @@
         data() {
             return {}
         },
-        computed: {},
+        computed: {
+            user() {
+                return this.$store.state.user
+            }
+        },
         methods: {},
         components: {}
     }
