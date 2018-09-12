@@ -20,7 +20,7 @@
     </v-content>
     <v-footer :fixed="fixed" class="teal lighten-2 justify-space-between" app>
       <span class="px-3">&copy; 2018</span>
-      <span class="px-3">Making lending easier</span>
+      <span class="px-3">Make lending easier</span>
     </v-footer>
   </v-app>
 </template>
