@@ -17,6 +17,21 @@ export default new Vuex.Store({
 
   },
   actions: {
+    //create new user
+    addUser() {
 
+    },
+    //delete a user
+    deleteUser() {
+
+    },
+    //start a new lend
+    newLend() {
+
+    },
+    //confirm lend with two parties, lender and lendee
+    lendConfirm() {
+
+    },
   }
 })
