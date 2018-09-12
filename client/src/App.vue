@@ -12,7 +12,7 @@
     </v-navigation-drawer>
     <v-toolbar app :clipped-left="clipped" class="teal lighten-2">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Lendr</v-toolbar-title>
+      <v-toolbar-title><span class="capitalize">{{currentRoute}}</span></v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>
@@ -50,6 +50,17 @@
         right: true,
         rightDrawer: false,
       }
+    },
+    computed: {
+      currentRoute() {
+        return this.$route.name
+      }
     }
   }
 </script>
+
+<style>
+  .capitalize {
+    text-transform: capitalize;
+  }
+</style>

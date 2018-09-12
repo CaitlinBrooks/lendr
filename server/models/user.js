@@ -12,7 +12,8 @@ let schema = new Schema({
   //every email must be unique on the database
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  created: { type: Number, required: true, default: Date.now() }
+  created: { type: Number, required: true, default: Date.now() },
+  picture: { type: String, default: "https://i.imgur.com/zSb0HR7.png", required: true }
 })
 
 

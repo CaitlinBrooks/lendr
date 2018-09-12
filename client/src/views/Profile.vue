@@ -1,6 +1,7 @@
 <template>
     <div class="Profile">
         <h1>Welcome, {{this.user.name}}</h1>
+        <img :src=this.user.picture alt="">
     </div>
 </template>
 
