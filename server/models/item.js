@@ -8,6 +8,7 @@ let schema = new Schema({
   recipientId: { type: String, required: true },
   picture: { type: String, default: "https://i.imgur.com/zSb0HR7.png", required: true },
   description: { type: String, default: "item" },
+  productionYear: { type: Number },
   created: { type: Number, required: true, default: Date.now() },
 })
 
