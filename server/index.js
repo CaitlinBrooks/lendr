@@ -26,11 +26,10 @@ server.use(bp.urlencoded({
 
 //REGISTER YOUR AUTH ROUTES BEFORE YOUR GATEKEEPER, OTHERWISE YOU WILL NEVER GET LOGGED IN
 let auth = require('./server-assets/auth/routes')
-let user = require('./routes/user')
 server.use(auth.session)
 server.use(auth.router)
 // @ts-ignore
-server.use(user.router)
+
 
 
 //Gate Keeper Must login to access any route below this code
@@ -44,7 +43,8 @@ server.use((req, res, next) => {
 })
 
 //YOUR ROUTES HERE!!!!!!
-
+let user = require('./routes/user')
+server.use(user.router)
 
 
 

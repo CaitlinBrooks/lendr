@@ -1,6 +1,7 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
+let schemaName = 'User'
 
 //bcrypt uses hashing and salt to obfiscate your password 
 let bcrypt = require('bcryptjs')
@@ -29,4 +30,4 @@ schema.methods.validatePassword = function (password) {
   return bcrypt.compareSync(password, this.password)
 }
 
-module.exports = mongoose.model('User', schema)
+module.exports = mongoose.model(schemaName, schema)
