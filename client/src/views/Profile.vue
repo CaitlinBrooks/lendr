@@ -40,7 +40,13 @@
                 return this.$store.state.user
             }
         },
-        methods: {},
+        methods: {
+            addLend() { },
+            lendConfirm() { },
+            deleteLend() { },
+
+
+        },
         components: {}
     }
 </script>
