@@ -19,12 +19,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    lends: {},
+
   },
   mutations: {
     setUser(state, user) {
       state.user = user
-    }
+    },
+    setLends(state, lends) {
+      state.lends = lends
+    },
+
   },
   actions: {
     //AUTH STUFF
@@ -55,18 +61,48 @@ export default new Vuex.Store({
           router.push({ name: 'login' })
         })
     },
-
     //start a new lend
-    createLend() {
-      //this.$store.dispatch("addLend", lendId);   not sure on second param
+    addLend({ commit, dispatch }, newLend) {
+      //most likely going to have to create newLend object above that has a lendId
+      api.post('lends', newLend)
+        .then(res => {
+          dispatch('getAllLends')
+          //need this method to build/draw profile
+        })
+        .catch(err => {
+          console.error(err.response.data.message)
+        })
+
+
     },
     //confirm lend with two parties, lender and lendee, needs two id's and two bools (we think)
+    //once item is returned we can move it to history / remove it from active lends
     lendConfirm() {
 
     },
-    //once item is returned we can move it to history / remove it from active lends
-    deleteLend() {
-
+    // I still need to check routes on this to make sure they match up
+    deleteLend({ dispatch, commit }, lendId) {
+      api.delete('lends/' + lendId)
+        .then(res => {
+          dispatch('getAllLends')
+        })
+        .catch(err => {
+          console.error(err.response.data.message)
+        })
     },
+    getAllLends({ commit, dispatch }) {
+      api.get('lends')
+        .then(res => {
+          commit('setLends', res.data.data)
+        })
+        .catch(err => {
+          console.error(err.response.data.message)
+        })
+    },
+
+
+
+
   }
 })
+
