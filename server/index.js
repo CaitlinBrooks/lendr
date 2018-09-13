@@ -29,6 +29,7 @@ let auth = require('./server-assets/auth/routes')
 let user = require('./routes/user')
 server.use(auth.session)
 server.use(auth.router)
+// @ts-ignore
 server.use(user.router)
 
 
