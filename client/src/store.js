@@ -57,7 +57,7 @@ export default new Vuex.Store({
     },
     //start a new lend
     addLend({ commit, dispatch }, newLend) {
-      //most likely going to have to create newLend object above
+      //most likely going to have to create newLend object above that has a lendId
       api.post('lends', newLend)
         .then(res => {
           dispatch('getAllLends')
@@ -70,14 +70,25 @@ export default new Vuex.Store({
 
     },
     //confirm lend with two parties, lender and lendee, needs two id's and two bools (we think)
+    //once item is returned we can move it to history / remove it from active lends
     lendConfirm() {
 
     },
-    //once item is returned we can move it to history / remove it from active lends
-    deleteLend() { },
-
+    // I still need to check routes on this to make sure they match up
+    deleteLend({ dispatch, commit }, lendId) {
+      api.delete('lends/' + lendId)
+        .then(res => {
+          dispatch('getAllLends')
+        })
+        .catch(err => {
+          console.error(err.response.data.message)
+        })
+    },
     getAllLends() { },
-  },
 
+
+
+
+  }
 })
 
