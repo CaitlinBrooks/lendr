@@ -58,7 +58,7 @@ export default new Vuex.Store({
 
     //start a new lend
     addLend() {
-
+      //this.$store.dispatch("addLend", lendId);   not sure on second param
     },
     //confirm lend with two parties, lender and lendee, needs two id's and two bools (we think)
     lendConfirm() {
