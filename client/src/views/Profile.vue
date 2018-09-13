@@ -6,7 +6,25 @@
                     <v-flex xs-5 py-1>
                         <v-img :src=this.user.picture height="125px" contain>
                         </v-img>
-                        <div class="mt-1 title text-xs-center">Change Proile Picture</div>
+                        <v-btn color="teal accent-4" dark @click="changeImg = !changeImg">Change Image</v-btn>
+                        <v-dialog v-model="changeImg" max-width="500px">
+                            <v-card>
+                                <v-card-title>
+                                    Update Profile Image
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-form v-model="valid">
+                                        <v-text-field v-model="imgUrl" label="Image URL" required></v-text-field>
+                                        <v-btn type="submit" color="teal accent-4" class="white--text" @click="updateProfilePicture">
+                                            Submit
+                                        </v-btn>
+                                    </v-form>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn color="primary" flat @click="changeImg=false">Close</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
                     </v-flex>
                     <v-flex xs7>
                         <v-card-title primary-title>
@@ -35,7 +53,8 @@
         name: 'Profile',
         data() {
             return {
-                imgUrl: ''
+                imgUrl: '',
+                changeImg: false
             }
         },
         computed: {
