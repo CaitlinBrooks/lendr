@@ -5,7 +5,7 @@
       <v-list>
         <v-list-tile value="true" v-for="(item, i) in items" :key="i">
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" class="teal--text text--lighten-2"></v-list-tile-title>
+            <v-list-tile-title item.action v-text="item.title" class="teal--text text--lighten-2"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -52,7 +52,8 @@
           title: 'Messages'
         },
         {
-          title: 'Logout'
+          title: 'Logout',
+          // action: "@click='logout'"
         }],
         miniVariant: false,
         right: true,
