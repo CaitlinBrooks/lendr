@@ -13,7 +13,7 @@
                                     Update Profile Image
                                 </v-card-title>
                                 <v-card-text>
-                                    <v-form v-model="valid">
+                                    <v-form>
                                         <v-text-field v-model="imgUrl" label="Image URL" required></v-text-field>
                                         <v-btn type="submit" color="teal accent-4" class="white--text" @click="updateProfilePicture">
                                             Submit
@@ -21,7 +21,7 @@
                                     </v-form>
                                 </v-card-text>
                                 <v-card-actions>
-                                    <v-btn color="primary" flat @click="changeImg=false">Close</v-btn>
+                                    <v-btn color="teal accent-4" flat @click="changeImg=false">Close</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
