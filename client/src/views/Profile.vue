@@ -6,6 +6,7 @@
                     <v-flex xs-5 py-1>
                         <v-img :src=this.user.picture height="125px" contain>
                         </v-img>
+                        <div class="mt-1 title text-xs-center">Change Proile Picture</div>
                     </v-flex>
                     <v-flex xs7>
                         <v-card-title primary-title>
@@ -33,7 +34,9 @@
     export default {
         name: 'Profile',
         data() {
-            return {}
+            return {
+                imgUrl: ''
+            }
         },
         computed: {
             user() {
@@ -44,6 +47,12 @@
             createLend() { },
             lendConfirm() { },
             deleteLend() { },
+            updateProfilePicture() {
+                this.$store.dispatch('updateProfilePicture', userData = {
+                    _id: this.user._id,
+                    imgUrl: this.imgUrl
+                })
+            },
         },
         components: {}
     }
