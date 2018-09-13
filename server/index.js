@@ -43,8 +43,8 @@ server.use((req, res, next) => {
 })
 
 //YOUR ROUTES HERE!!!!!!
-let user = require('./routes/user')
-server.use(user.router)
+let userRoutes = require('./routes/user')
+server.use('/api/user', userRoutes)
 
 
 
