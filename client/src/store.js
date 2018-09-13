@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from './router'
+import { setupMaster } from 'cluster';
 
 let auth = axios.create({
   baseURL: "//localhost:3000/auth/",
@@ -89,6 +90,12 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.error(err.response.data.message)
+        })
+    },
+    updateProfilePicture({ commit }, userData) {
+      api.put('/users/edit', userData)
+        .then(res => {
+          commit('setUser', res.data)
         })
     },
     getAllLends({ commit, dispatch }) {
