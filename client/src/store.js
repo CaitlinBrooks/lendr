@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from './router'
-// import { setupMaster } from 'cluster';
 
 let auth = axios.create({
   baseURL: "//localhost:3000/auth/",
