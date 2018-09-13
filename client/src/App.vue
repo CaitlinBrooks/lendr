@@ -53,7 +53,7 @@
         },
         {
           title: 'Logout',
-          // action: "@click='logout'"
+          // action: "@click='logout'" vbind @click
         }],
         miniVariant: false,
         right: true,
