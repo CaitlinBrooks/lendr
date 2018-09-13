@@ -12,9 +12,12 @@
     </v-navigation-drawer>
     <v-toolbar app :clipped-left="clipped" class="teal lighten-2">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title><span class="capitalize">{{currentRoute}}</span></v-toolbar-title>
+      <v-toolbar-title>
+        <span class="capitalize">{{currentRoute}}</span>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-      <img src="./assets/Untitled.png" height="35"></v-img>
+      <img src="./assets/Untitled.png" height="35">
+      </v-img>
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>
@@ -43,10 +46,13 @@
           title: 'My Profile'
         },
         {
-          title: 'My Other Stuff'
+          title: 'My Calendar'
         },
         {
-          title: 'More of my stuff'
+          title: 'Messages'
+        },
+        {
+          title: 'Logout'
         }],
         miniVariant: false,
         right: true,
