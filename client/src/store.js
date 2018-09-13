@@ -55,9 +55,16 @@ export default new Vuex.Store({
           router.push({ name: 'login' })
         })
     },
-
     //start a new lend
-    createLend() {
+    addLend({ commit, dispatch }, newLend) {
+      api.post('lends', newLend)
+        .then(res => {
+          dispatch('getAllLends')
+        })
+        .catch(err => {
+          console.error(err.response.data.message)
+        })
+
       //this.$store.dispatch("addLend", lendId);   not sure on second param
     },
     //confirm lend with two parties, lender and lendee, needs two id's and two bools (we think)
@@ -65,8 +72,9 @@ export default new Vuex.Store({
 
     },
     //once item is returned we can move it to history / remove it from active lends
-    deleteLend() {
+    deleteLend() { },
 
-    },
   }
+
 })
+
