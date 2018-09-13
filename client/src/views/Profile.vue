@@ -43,11 +43,11 @@
                 </v-card-actions>
             </v-card>
         </v-flex>
-        <v-layout row wrap>
+        <!-- <v-layout row wrap>
             <v-flex xs12 sm6 class="hidden-xs-only mx-3 mt-2">
                 <v-date-picker v-model="picker2" color="green lighten-1" header-color="teal darken-2"></v-date-picker>
             </v-flex>
-        </v-layout>
+        </v-layout> -->
     </div>
 </template>
 
