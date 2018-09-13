@@ -44,9 +44,6 @@
             addLend() { },
             lendConfirm() { },
             deleteLend() { },
-
-
-
         },
         components: {}
     }
