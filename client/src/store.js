@@ -77,6 +77,7 @@ export default new Vuex.Store({
     },
     //confirm lend with two parties, lender and lendee, needs two id's and two bools (we think)
     //once item is returned we can move it to history / remove it from active lends
+    //gonna be a tricky one I think
     lendConfirm() {
 
     },
@@ -99,10 +100,6 @@ export default new Vuex.Store({
           console.error(err.response.data.message)
         })
     },
-
-
-
-
   }
 })
 
