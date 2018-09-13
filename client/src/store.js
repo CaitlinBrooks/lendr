@@ -57,15 +57,17 @@ export default new Vuex.Store({
     },
     //start a new lend
     addLend({ commit, dispatch }, newLend) {
+      //most likely going to have to create newLend object above
       api.post('lends', newLend)
         .then(res => {
           dispatch('getAllLends')
+          //need this method to build/draw profile
         })
         .catch(err => {
           console.error(err.response.data.message)
         })
 
-      //this.$store.dispatch("addLend", lendId);   not sure on second param
+
     },
     //confirm lend with two parties, lender and lendee, needs two id's and two bools (we think)
     lendConfirm() {
@@ -74,7 +76,8 @@ export default new Vuex.Store({
     //once item is returned we can move it to history / remove it from active lends
     deleteLend() { },
 
-  }
+    getAllLends() { },
+  },
 
 })
 
