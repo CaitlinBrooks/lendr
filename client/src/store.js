@@ -19,12 +19,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    lends: {},
+
   },
   mutations: {
     setUser(state, user) {
       state.user = user
-    }
+    },
+    setLends(state, lends) {
+      state.lends = lends
+    },
+
   },
   actions: {
     //AUTH STUFF
@@ -84,7 +90,15 @@ export default new Vuex.Store({
           console.error(err.response.data.message)
         })
     },
-    getAllLends() { },
+    getAllLends({ commit, dispatch }) {
+      api.get('lends')
+        .then(res => {
+          commit('setLends', res.data.data)
+        })
+        .catch(err => {
+          console.error(err.response.data.message)
+        })
+    },
 
 
 
