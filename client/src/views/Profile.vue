@@ -41,7 +41,7 @@
             }
         },
         methods: {
-            addLend() { },
+            createLend() { },
             lendConfirm() { },
             deleteLend() { },
         },
