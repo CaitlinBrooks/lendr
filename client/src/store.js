@@ -100,10 +100,6 @@ export default new Vuex.Store({
           console.error(err.response.data.message)
         })
     },
-
-
-
-
   }
 })
 
