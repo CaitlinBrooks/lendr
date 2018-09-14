@@ -46,7 +46,7 @@ server.use((req, res, next) => {
 let userRoutes = require('./routes/user')
 let lendRoutes = require('./routes/lend')
 server.use('/api/user', userRoutes)
-server.use('api/lend', userRoutes)
+server.use('api/lend', lendRoutes)
 
 
 
