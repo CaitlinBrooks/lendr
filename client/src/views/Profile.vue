@@ -47,6 +47,27 @@
             <v-flex xs12 sm6 class="hidden-xs-only mx-3 mt-2">
                 <v-date-picker color="green lighten-1" header-color="teal darken-2"></v-date-picker>
             </v-flex>
+            <v-btn color="teal accent-4" dark @click="newLend = !newLend">New Lend</v-btn>
+            <v-dialog v-model="newLend" max-width="500px">
+                <v-card>
+                    <v-card-title>
+                        Create New Lend
+                    </v-card-title>
+                    <v-card-text>
+                        <v-form ref="form" @submit.prevent="createLend">
+                            <v-text-field v-model="lendTitle" label="Title" required></v-text-field>
+                            <v-text-field v-model="lendDescription" label="Item Description" required></v-text-field>
+                            <v-text-field v-model="lendBorrower" label="Who Is This For?" required></v-text-field>
+                            <v-btn type="submit" color="teal accent-4" class="white--text">
+                                Submit
+                            </v-btn>
+                        </v-form>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn color="teal accent-4" flat @click="newLend=false">Close</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </v-layout>
     </div>
 </template>
@@ -58,7 +79,11 @@
         data() {
             return {
                 imgUrl: '',
-                changeImg: false
+                changeImg: false,
+                newLend: false,
+                lendTitle: '',
+                lendDescription: '',
+                lendBorrower: ''
             }
         },
         computed: {
@@ -67,7 +92,14 @@
             }
         },
         methods: {
-            createLend() { },
+            createLend() {
+                let lendData = {
+                    title: this.lendTitle,
+                    description: this.lendDescription,
+                    lendBorrower: this.lendBorrower
+                }
+                console.log(lendData)
+            },
             lendConfirm() { },
             deleteLend() { },
             updateProfilePicture() {
