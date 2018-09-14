@@ -73,7 +73,7 @@
             updateProfilePicture() {
                 let userData = {
                     _id: this.user._id,
-                    imgUrl: this.imgUrl
+                    picture: this.imgUrl
                 }
                 this.$store.dispatch('updateProfilePicture', userData)
                 console.log(userData)
