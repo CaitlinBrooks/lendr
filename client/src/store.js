@@ -58,7 +58,7 @@ export default new Vuex.Store({
     logout() {
       auth.delete('logout')
         .then(res => {
-          router.push({ name: 'login' })
+          router.push({ name: 'home' })
         })
     },
     //start a new lend
@@ -91,10 +91,17 @@ export default new Vuex.Store({
           console.error(err.response.data.message)
         })
     },
-    updateProfilePicture({ commit }, userData) {
-      api.put('users/edit', userData)
+    updateProfilePicture({ dispatch }, userData) {
+      api.put('user/edit', userData)
+        .then(() => {
+          dispatch('getUser')
+        })
+    },
+    getUser({ commit }) {
+      api.get('user')
         .then(res => {
-          commit('setUser', res.data)
+          console.log(res.data[0])
+          commit('setUser', res.data[0])
         })
     },
     getAllLends({ commit, dispatch }) {

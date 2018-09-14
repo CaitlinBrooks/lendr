@@ -10,4 +10,15 @@ router.put('/edit', (req, res) => {
     })
 })
 
+router.get('/', (req, res) => {
+  Users.find({ _id: req.session.uid })
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      console.log(err)
+      next()
+    })
+})
+
 module.exports = router 

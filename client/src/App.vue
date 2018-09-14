@@ -5,7 +5,7 @@
       <v-list>
         <v-list-tile value="true" v-for="(item, i) in items" :key="i">
           <v-list-tile-content>
-            <v-list-tile-title item.action v-text="item.title" class="teal--text text--lighten-2"></v-list-tile-title>
+            <v-list-tile-title @click='item.action' v-text="item.title" class="teal--text text--lighten-2"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -40,20 +40,25 @@
         drawer: false,
         fixed: false,
         items: [{
-          title: 'My Lends'
+
+          title: 'My Profile',
+          action: this.placeholder
         },
         {
-          title: 'My Profile'
+          title: 'My Lends',
+          action: this.placeholder
         },
         {
-          title: 'My Calendar'
+          title: 'My Calendar',
+          action: this.placeholder
         },
         {
-          title: 'Messages'
+          title: 'Messages',
+          action: this.placeholder
         },
         {
           title: 'Logout',
-          // action: "@click='logout'" vbind @click
+          action: this.logout
         }],
         miniVariant: false,
         right: true,
@@ -64,6 +69,15 @@
       currentRoute() {
         return this.$route.name
       }
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch('logout')
+      },
+
+      placeholder() {
+        console.log('No Function Yet!')
+      }
     }
   }
 </script>
@@ -71,5 +85,9 @@
 <style>
   .capitalize {
     text-transform: capitalize;
+  }
+
+  .menu-border {
+    border-bottom: grey, solid, 1px
   }
 </style>
