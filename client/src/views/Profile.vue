@@ -103,7 +103,7 @@
                         userID: this.user._id
                     }
                 }
-                    .then(() => { console.log(lendData) })
+                setTimeout(this.testSomeStuff(lendData), 5000)
             },
             lendConfirm() { },
             deleteLend() { },
@@ -117,6 +117,9 @@
             },
             findUserId(lendBorrower) {
                 this.$store.dispatch('findUserId', lendBorrower)
+            },
+            testSomeStuff(lendData) {
+                console.log(lendData)
             }
         },
         components: {}
