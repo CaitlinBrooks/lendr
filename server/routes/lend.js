@@ -3,7 +3,7 @@ let Lends = require('../models/lend')
 
 
 //POST
-router.post('/', (req, res, next) => {
+router.post('/createLend', (req, res, next) => {
     // @ts-ignore
     Lends.create(req.body)
         .then(newLend => {
