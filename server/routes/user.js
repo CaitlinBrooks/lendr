@@ -11,6 +11,7 @@ router.put('/edit', (req, res) => {
 })
 
 router.get('/', (req, res, next) => {
+  // @ts-ignore
   Users.find({ _id: req.session.uid })
     .then(data => {
       res.send(data)
