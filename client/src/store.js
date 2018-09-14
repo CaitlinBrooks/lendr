@@ -120,6 +120,12 @@ export default new Vuex.Store({
         .then(res => {
           commit('setBorrower', res.data)
         })
+    },
+    createLend({ commit, dispatch }, lendData) {
+      api.post('lend', lendData)
+        .then(res => {
+          console.log(res)
+        })
     }
   }
 })

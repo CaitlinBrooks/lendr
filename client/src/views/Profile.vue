@@ -98,13 +98,14 @@
                     title: this.lendTitle,
                     description: this.lendDescription,
                     borrower: {
-                        userID: this.$store.state.borrower
+                        userId: this.$store.state.borrower
                     },
                     lendr: {
-                        userID: this.user._id
-                    }
+                        userId: this.user._id
+                    },
+                    dueDate: 1
                 }
-                this.testSomeStuff(lendData)
+                this.$store.dispatch('createLend', lendData)
             },
             lendConfirm() { },
             deleteLend() { },
