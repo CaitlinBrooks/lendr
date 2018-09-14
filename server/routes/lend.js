@@ -16,11 +16,23 @@ router.post('/', (req, res, next) => {
         })
 })
 
-router.get('/lendrId', (req, res, next) => {
+router.get('/mylends/:lendrId', (req, res, next) => {
     // @ts-ignore
-    Lends.find({ lendr.userId: req.body })
+    Lends.find({ "lendr.userId": req.params.lendrId })
         .then(data => {
-            console.log(res.data)
+            res.send(data)
+        })
+        .catch(err => {
+            console.log(err)
+            next()
+        })
+})
+
+router.get('/myborrows/:borrowerId', (req, res, next) => {
+    // @ts-ignore
+    Lends.find({ "borrower.userId": req.params.borrowerId })
+        .then(data => {
+            res.send(data)
         })
         .catch(err => {
             console.log(err)
