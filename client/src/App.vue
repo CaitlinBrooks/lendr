@@ -5,7 +5,7 @@
       <v-list>
         <v-list-tile value="true" v-for="(item, i) in items" :key="i">
           <v-list-tile-content>
-            <v-list-tile-title @click='item.action' v-text="item.title" class="teal--text text--lighten-2"></v-list-tile-title>
+            <v-list-tile-title :style="{ cursor: 'pointer'}" @click='item.action' v-text="item.title" class="teal--text text--lighten-2"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -42,11 +42,11 @@
         items: [{
 
           title: 'My Profile',
-          action: this.placeholder
+          action: this.profilePage
         },
         {
           title: 'My Lends',
-          action: this.placeholder
+          action: this.lendsPage
         },
         {
           title: 'My Calendar',
@@ -77,6 +77,14 @@
 
       placeholder() {
         console.log('No Function Yet!')
+      },
+
+      lendsPage() {
+        this.$router.push('Lends')
+      },
+
+      profilePage() {
+        this.$router.push('Profile')
       }
     }
   }
