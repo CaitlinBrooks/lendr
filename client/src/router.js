@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 // @ts-ignore
 import Profile from './views/Profile.vue'
+// @ts-ignore
+import Lends from './views/Lends.vue'
 
 Vue.use(Router)
 
@@ -18,6 +20,11 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/lends',
+      name: 'lends',
+      component: Lends
     }
   ]
 })
