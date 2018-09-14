@@ -5,9 +5,9 @@ let Lends = require('../models/lend')
 //POST
 router.post('/', (req, res, next) => {
     // @ts-ignore
-    req.body.userId = req.session.uid
     Lends.create(req.body)
         .then(newLend => {
+            console.log("routes work")
             res.send(newLend)
         })
         .catch(err => {

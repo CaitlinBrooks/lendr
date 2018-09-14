@@ -122,9 +122,9 @@ export default new Vuex.Store({
         })
     },
     createLend({ commit, dispatch }, lendData) {
-      api.post('lend', lendData)
+      api.post('lend/', lendData)
         .then(res => {
-          console.log(res)
+          console.log("store works")
         })
     }
   }

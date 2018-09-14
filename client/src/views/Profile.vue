@@ -106,6 +106,7 @@
                     dueDate: 1
                 }
                 this.$store.dispatch('createLend', lendData)
+                console.log("profile works")
             },
             lendConfirm() { },
             deleteLend() { },
