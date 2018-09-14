@@ -13,9 +13,9 @@
                                     Update Profile Image
                                 </v-card-title>
                                 <v-card-text>
-                                    <v-form>
+                                    <v-form ref="form" @submit.prevent="updateProfilePicture">
                                         <v-text-field v-model="imgUrl" label="Image URL" required></v-text-field>
-                                        <v-btn type="submit" color="teal accent-4" class="white--text" @click="updateProfilePicture">
+                                        <v-btn type="submit" color="teal accent-4" class="white--text">
                                             Submit
                                         </v-btn>
                                     </v-form>
@@ -43,11 +43,11 @@
                 </v-card-actions>
             </v-card>
         </v-flex>
-        <!-- <v-layout row wrap>
+        <v-layout row wrap>
             <v-flex xs12 sm6 class="hidden-xs-only mx-3 mt-2">
-                <v-date-picker v-model="picker2" color="green lighten-1" header-color="teal darken-2"></v-date-picker>
+                <v-date-picker color="green lighten-1" header-color="teal darken-2"></v-date-picker>
             </v-flex>
-        </v-layout> -->
+        </v-layout>
     </div>
 </template>
 
@@ -71,10 +71,12 @@
             lendConfirm() { },
             deleteLend() { },
             updateProfilePicture() {
-                this.$store.dispatch('updateProfilePicture', userData = {
+                let userData = {
                     _id: this.user._id,
                     imgUrl: this.imgUrl
-                })
+                }
+                this.$store.dispatch('updateProfilePicture', userData)
+                console.log(userData)
             },
         },
         components: {}

@@ -40,16 +40,21 @@
         drawer: false,
         fixed: false,
         items: [{
-          title: 'My Lends'
+
+          title: 'My Profile',
+          action: this.placeholder
         },
         {
-          title: 'My Profile'
+          title: 'My Lends',
+          action: this.placeholder
         },
         {
-          title: 'My Calendar'
+          title: 'My Calendar',
+          action: this.placeholder
         },
         {
-          title: 'Messages'
+          title: 'Messages',
+          action: this.placeholder
         },
         {
           title: 'Logout',
@@ -67,15 +72,11 @@
     },
     methods: {
       logout() {
-        console.log('Goodbye')
-        // auth.delete('logout')
-        //   .then(res => {
-        //     router.push({ name: 'login' })
-
-        //   })
+        this.$store.dispatch('logout')
       },
-      test() {
-        console.log('what')
+
+      placeholder() {
+        console.log('No Function Yet!')
       }
     }
   }
@@ -84,5 +85,9 @@
 <style>
   .capitalize {
     text-transform: capitalize;
+  }
+
+  .menu-border {
+    border-bottom: grey, solid, 1px
   }
 </style>
