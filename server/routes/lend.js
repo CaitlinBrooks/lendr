@@ -16,5 +16,17 @@ router.post('/', (req, res, next) => {
         })
 })
 
+router.get('/lendrId', (req, res, next) => {
+    // @ts-ignore
+    Lends.find({ lendr.userId: req.body })
+        .then(data => {
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+            next()
+        })
+})
+
 
 module.exports = router 
