@@ -113,6 +113,12 @@ export default new Vuex.Store({
           console.error(err.response.data.message)
         })
     },
+    findUserId({ commit, dispatch }, lendBorrower) {
+      api.get('user/findByName/' + lendBorrower)
+        .then(res => {
+          console.log(res.data)
+        })
+    }
   }
 })
 

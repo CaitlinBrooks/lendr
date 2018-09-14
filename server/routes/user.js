@@ -10,7 +10,7 @@ router.put('/edit', (req, res) => {
     })
 })
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Users.find({ _id: req.session.uid })
     .then(data => {
       res.send(data)
@@ -18,6 +18,13 @@ router.get('/', (req, res) => {
     .catch(err => {
       console.log(err)
       next()
+    })
+})
+
+router.get('/findByName/:username', (req, res) => {
+  Users.findOne({ name: req.params.username })
+    .then(data => {
+      res.send(data._id)
     })
 })
 

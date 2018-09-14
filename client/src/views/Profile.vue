@@ -96,9 +96,14 @@
                 let lendData = {
                     title: this.lendTitle,
                     description: this.lendDescription,
-                    lendBorrower: this.lendBorrower
+                    borrower: {
+                        userID: this.findUserId(this.lendBorrower)
+                    },
+                    lendr: {
+                        userID: this.user._id
+                    }
                 }
-                console.log(lendData)
+                    .then(() => { console.log(lendData) })
             },
             lendConfirm() { },
             deleteLend() { },
@@ -110,6 +115,9 @@
                 this.$store.dispatch('updateProfilePicture', userData)
                 console.log(userData)
             },
+            findUserId(lendBorrower) {
+                this.$store.dispatch('findUserId', lendBorrower)
+            }
         },
         components: {}
     }
