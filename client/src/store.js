@@ -21,7 +21,7 @@ export default new Vuex.Store({
   state: {
     user: {},
     lends: {},
-
+    borrower: ''
   },
   mutations: {
     setUser(state, user) {
@@ -30,7 +30,9 @@ export default new Vuex.Store({
     setLends(state, lends) {
       state.lends = lends
     },
-
+    setBorrower(state, borrower) {
+      state.borrower = borrower
+    }
   },
   actions: {
     //AUTH STUFF
@@ -116,7 +118,7 @@ export default new Vuex.Store({
     findUserId({ commit, dispatch }, lendBorrower) {
       api.get('user/findByName/' + lendBorrower)
         .then(res => {
-          console.log(res.data)
+          commit('setBorrower', res.data)
         })
     }
   }

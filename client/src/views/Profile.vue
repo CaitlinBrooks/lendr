@@ -54,7 +54,7 @@
                         Create New Lend
                     </v-card-title>
                     <v-card-text>
-                        <v-form ref="form" @submit.prevent="createLend">
+                        <v-form ref="form" @submit.prevent="findUserId">
                             <v-text-field v-model="lendTitle" label="Title" required></v-text-field>
                             <v-text-field v-model="lendDescription" label="Item Description" required></v-text-field>
                             <v-text-field v-model="lendBorrower" label="Who Is This For?" required></v-text-field>
@@ -93,17 +93,18 @@
         },
         methods: {
             createLend() {
+
                 let lendData = {
                     title: this.lendTitle,
                     description: this.lendDescription,
                     borrower: {
-                        userID: this.findUserId(this.lendBorrower)
+                        userID: this.$store.state.borrower
                     },
                     lendr: {
                         userID: this.user._id
                     }
                 }
-                setTimeout(this.testSomeStuff(lendData), 5000)
+                this.testSomeStuff(lendData)
             },
             lendConfirm() { },
             deleteLend() { },
@@ -115,8 +116,11 @@
                 this.$store.dispatch('updateProfilePicture', userData)
                 console.log(userData)
             },
-            findUserId(lendBorrower) {
-                this.$store.dispatch('findUserId', lendBorrower)
+            findUserId() {
+                this.$store.dispatch('findUserId', this.lendBorrower)
+                    .then(() => {
+                        this.createLend()
+                    })
             },
             testSomeStuff(lendData) {
                 console.log(lendData)
