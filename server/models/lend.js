@@ -18,8 +18,8 @@ let schema = new Schema({
     description: { type: String, default: "item" },
     created: { type: Number, required: true, default: Date.now() },
     dueDate: { type: Number, required: true, default: Date() },
-    lendr: [lendr],
-    borrower: [borrower]
+    lendr: lendr,
+    borrower: borrower
 })
 
 module.exports = mongoose.model(schemaName, schema)
