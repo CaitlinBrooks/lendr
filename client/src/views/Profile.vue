@@ -31,6 +31,7 @@
                             <div>
                                 <div class="headline">Welcome, {{this.user.name}}</div>
                                 <div>You have {{this.lends.length}} current lends</div>
+                                <div>You have {{this.borrows.length}} current borrows</div>
                             </div>
                         </v-card-title>
                     </v-flex>
@@ -92,6 +93,9 @@
             },
             lends() {
                 return this.$store.state.lends
+            },
+            borrows() {
+                return this.$store.state.borrows
             }
         },
         methods: {
