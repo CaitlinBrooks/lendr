@@ -31,6 +31,9 @@ export default new Vuex.Store({
     setLends(state, lends) {
       state.lends = lends
     },
+    setBorrows(state, borrows) {
+      state.borrows = borrows
+    },
     setBorrower(state, borrower) {
       state.borrower = borrower
     }
@@ -69,7 +72,7 @@ export default new Vuex.Store({
     //start a new lend
     addLend({ commit, dispatch }, newLend) {
       //most likely going to have to create newLend object above that has a lendId
-      api.post('lends', newLend)
+      api.post('lend', newLend)
         .then(res => {
           dispatch('getAllLends')
           //need this method to build/draw profile
@@ -88,7 +91,7 @@ export default new Vuex.Store({
     },
     // I still need to check routes on this to make sure they match up
     deleteLend({ dispatch, commit }, lendId) {
-      api.delete('lends/' + lendId)
+      api.delete('lend/' + lendId)
         .then(res => {
           dispatch('getAllLends')
         })
@@ -110,7 +113,7 @@ export default new Vuex.Store({
         })
     },
     getLends({ commit, dispatch }, userId) {
-      api.get('lends/mylends/' + userId)
+      api.get('lend/mylends/' + userId)
         .then(res => {
           commit('setLends', res.data)
         })
@@ -119,7 +122,7 @@ export default new Vuex.Store({
         })
     },
     getBorrows({ commit }, userId) {
-      api.get('lends/myborrows/' + userId)
+      api.get('lend/myborrows/' + userId)
         .then(res => {
           commit('setBorrows', res.data)
         })

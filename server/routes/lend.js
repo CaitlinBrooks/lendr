@@ -23,8 +23,7 @@ router.get('/mylends/:lendrId', (req, res, next) => {
             res.send(data)
         })
         .catch(err => {
-            console.log(err)
-            next()
+            res.status(400).send(err)
         })
 })
 
@@ -35,8 +34,7 @@ router.get('/myborrows/:borrowerId', (req, res, next) => {
             res.send(data)
         })
         .catch(err => {
-            console.log(err)
-            next()
+            res.status(400).send(err)
         })
 })
 

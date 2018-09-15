@@ -1,20 +1,25 @@
 <template>
-  <div>
-    <p>THIS IS THE LENDS PAGE</p>
-  </div>
+  <v-container>
+    <v-layout row wrap>
+      <v-flex xs6>
+        <h1>My Lends</h1>
+        <v-list v-for="(lend, i) in this.myLends" :key="i">
+          {{lend.title}}
+        </v-list>
+      </v-flex>
+      <v-flex xs6>
+        <h1>My Borrows</h1>
+        <v-list v-for="(borrow, i) in this.myBorrows" :key="i">
+          {{borrow.title}}
+        </v-list>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
   export default {
     name: 'Lends',
-    mounted: {
-      getLends() {
-        this.$store.dispatch('getLends', this.$store.state.user._id)
-      },
-      getBorrows() {
-        this.$store.dispatch('getBorrows', this.$store.state.user._id)
-      }
-    },
     computed: {
       myLends() {
         return this.$store.state.lends
