@@ -20,7 +20,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: {},
-    lends: {},
+    lends: [],
+    borrows: [],
     borrower: ''
   },
   mutations: {
@@ -48,6 +49,8 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'profile' })
+          dispatch('getLends', this.state.user._id)
+          dispatch('getBorrows', this.state.user._id)
         })
     },
     login({ commit, dispatch }, creds) {
@@ -106,10 +109,19 @@ export default new Vuex.Store({
           commit('setUser', res.data[0])
         })
     },
-    getAllLends({ commit, dispatch }) {
-      api.get('lends')
+    getLends({ commit, dispatch }, userId) {
+      api.get('lends/mylends/' + userId)
         .then(res => {
-          commit('setLends', res.data.data)
+          commit('setLends', res.data)
+        })
+        .catch(err => {
+          console.error(err.response.data.message)
+        })
+    },
+    getBorrows({ commit }, userId) {
+      api.get('lends/myborrows/' + userId)
+        .then(res => {
+          commit('setBorrows', res.data)
         })
         .catch(err => {
           console.error(err.response.data.message)

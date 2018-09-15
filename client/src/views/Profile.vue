@@ -3,7 +3,7 @@
         <v-flex xs12 mx-3 mt-2 elevation-2>
             <v-card color="teal" class="white--text">
                 <v-layout row>
-                    <v-flex xs-5 py-1>
+                    <v-flex xs-5 py-1 style="justify-content: center;">
                         <v-img :src=this.user.picture height="125px" contain>
                         </v-img>
                         <v-btn color="teal accent-4" dark @click="changeImg = !changeImg">Change Image</v-btn>
@@ -27,7 +27,7 @@
                         </v-dialog>
                     </v-flex>
                     <v-flex xs7>
-                        <v-card-title primary-title>
+                        <v-card-title primary-title style="justify-content: center;">
                             <div>
                                 <div class="headline">Welcome, {{this.user.name}}</div>
                                 <div>You have 0 current lends</div>
