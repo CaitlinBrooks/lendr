@@ -30,7 +30,7 @@
                         <v-card-title primary-title style="justify-content: center;">
                             <div>
                                 <div class="headline">Welcome, {{this.user.name}}</div>
-                                <div>You have 0 current lends</div>
+                                <div>You have {{this.lends.length}} current lends</div>
                             </div>
                         </v-card-title>
                     </v-flex>
@@ -89,11 +89,13 @@
         computed: {
             user() {
                 return this.$store.state.user
+            },
+            lends() {
+                return this.$store.state.lends
             }
         },
         methods: {
             createLend() {
-
                 let lendData = {
                     title: this.lendTitle,
                     description: this.lendDescription,
