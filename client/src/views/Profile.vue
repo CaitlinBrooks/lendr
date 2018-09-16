@@ -76,7 +76,7 @@
                     <v-card-title>
                         Confirm New Lend
                     </v-card-title>
-                    <v-card-text>
+                    <v-card-text text-xl-center>
                         <div class="title">Are you sure you want to create this lend?</div>
                         <div class="subheading">Title</div>
                         <div class="body-1">{{this.lendTitle}}</div>
