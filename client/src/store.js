@@ -138,8 +138,8 @@ export default new Vuex.Store({
     },
     createLend({ commit, dispatch }, lendData) {
       api.post('/lend/createLend/', lendData)
-        .then(res => {
-          console.log("store works")
+        .then(() => {
+          dispatch('authenticate')
         })
     }
   }
