@@ -49,6 +49,7 @@
                 <v-date-picker color="green lighten-1" header-color="teal darken-2"></v-date-picker>
             </v-flex>
             <v-btn color="teal accent-4" dark @click="newLend = !newLend">New Lend</v-btn>
+            <!-- New Lend Form -->
             <v-dialog v-model="newLend" max-width="500px">
                 <v-card>
                     <v-card-title>
@@ -59,13 +60,34 @@
                             <v-text-field v-model="lendTitle" label="Title" required></v-text-field>
                             <v-text-field v-model="lendDescription" label="Item Description" required></v-text-field>
                             <v-text-field v-model="lendBorrower" label="Who Is This For?" required></v-text-field>
-                            <v-btn type="submit" color="teal accent-4" class="white--text">
+                            <v-btn type="submit" color="teal accent-4" class="white--text" @click="confirmLend = !confirmLend">
                                 Submit
                             </v-btn>
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
                         <v-btn color="teal accent-4" flat @click="newLend=false">Close</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <!-- CONFIRMATION -->
+            <v-dialog v-model="confirmLend" max-width="500px">
+                <v-card>
+                    <v-card-title>
+                        Confirm New Lend
+                    </v-card-title>
+                    <v-card-text>
+                        <div class="title">Are you sure you want to create this lend?</div>
+                        <div class="subheading">Title</div>
+                        <div class="body-1">{{this.lendTitle}}</div>
+                        <div class="subheading">Description</div>
+                        <div class="body-1">{{this.lendDescription}}</div>
+                        <div class="subheading">Borrower</div>
+                        <div class="body-1">{{this.lendBorrower}}</div>
+                    </v-card-text>
+                    <v-btn @click="createLend">Confirm Lend</v-btn>
+                    <v-card-actions>
+                        <v-btn color="teal accent-4" flat @click="confirmLend=false">Cancel</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -82,6 +104,7 @@
                 imgUrl: '',
                 changeImg: false,
                 newLend: false,
+                confirmLend: false,
                 lendTitle: '',
                 lendDescription: '',
                 lendBorrower: ''
@@ -112,7 +135,8 @@
                     dueDate: 1
                 }
                 this.$store.dispatch('createLend', lendData)
-                console.log("profile works")
+                let newLend = false
+                let confirmLend = false
             },
             lendConfirm() { },
             deleteLend() { },
@@ -126,9 +150,6 @@
             },
             findUserId() {
                 this.$store.dispatch('findUserId', this.lendBorrower)
-                    .then(() => {
-                        this.createLend()
-                    })
             },
             testSomeStuff(lendData) {
                 console.log(lendData)
