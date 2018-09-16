@@ -61,6 +61,8 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'profile' })
+          dispatch('getLends', this.state.user._id)
+          dispatch('getBorrows', this.state.user._id)
         })
     },
     logout() {
@@ -142,11 +144,17 @@ export default new Vuex.Store({
           dispatch('authenticate')
         })
     },
-    validateLend({ commit, dispatch }, lendId) {
-      console.log("Validating Lend with id:" + lendId)
+    validateLend({ commit, dispatch }, borrow) {
+      api.put('/lend/mylends/' + borrow._id, borrow.lendr.lent = true)
+        .then(() => {
+          dispatch('authenticate')
+        })
     },
-    validateReturn({ commit, dispatch }, lendId) {
-      console.log("Validating Return with id:" + lendId)
+    validateReturn({ commit, dispatch }, lend) {
+      api.put('/lend/myBorrows/' + lend._id, lend.borrower.returned = true)
+        .then(() => {
+          dispatch('authenticate')
+        })
     }
   }
 })

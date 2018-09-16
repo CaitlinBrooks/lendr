@@ -38,5 +38,18 @@ router.get('/myborrows/:borrowerId', (req, res, next) => {
         })
 })
 
+router.put('/mylends/:lendId', (req, res, next) => {
+    Lends.findByIdAndUpdate(req.params.lendid, req.body)
+        .then(() => res.send({
+            message: "Lend validated!"
+        }))
+})
+
+router.put('/myborrows/:lendId', (req, res, next) => {
+    Lends.findByIdAndUpdate(req.params.lendid, req.body)
+        .then(() => res.send({
+            message: "Borrow validated!"
+        }))
+})
 
 module.exports = router 

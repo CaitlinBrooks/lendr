@@ -17,7 +17,7 @@
                   This item has been returned
                 </div>
                 <div v-else>
-                  <v-btn color="teal" @click="validateReturn(lend._id)">Has this been returned?</v-btn>
+                  <v-btn color="teal" @click="validateReturn(lend)">Has this been returned?</v-btn>
                 </div>
                 <div v-if=lend.lendr.lent>
                   Your borrower has recieved this.
@@ -46,7 +46,7 @@
                   You have marked this as recieved.
                 </div>
                 <div v-else justify-center>
-                  <v-btn color="teal" @click="validateLend(borrow._id)">Have you recieved this item?</v-btn>
+                  <v-btn color="teal" @click="validateLend(borrow)">Have you recieved this item?</v-btn>
                 </div>
                 <div v-if=borrow.borrower.returned justify-center>
                   This has been returned
@@ -78,12 +78,12 @@
       }
     },
     methods: {
-      validateLend(lendId) {
-        this.$store.dispatch('validateLend', lendId)
+      validateLend(borrow) {
+        this.$store.dispatch('validateLend', borrow)
       },
 
-      validateReturn(lendId) {
-        this.$store.dispatch('validateReturn', lendId)
+      validateReturn(lend) {
+        this.$store.dispatch('validateReturn', lend)
       }
     }
   }
