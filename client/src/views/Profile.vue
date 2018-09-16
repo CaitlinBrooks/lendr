@@ -135,8 +135,8 @@
                     dueDate: 1
                 }
                 this.$store.dispatch('createLend', lendData)
-                let newLend = false
-                let confirmLend = false
+                this.newLend = false
+                this.confirmLend = false
             },
             lendConfirm() { },
             deleteLend() { },
