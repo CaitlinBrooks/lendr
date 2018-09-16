@@ -17,7 +17,7 @@
                   This item has been returned
                 </div>
                 <div v-else>
-                  <v-btn color="teal">Has this been returned?</v-btn>
+                  <v-btn color="teal" @click="validateReturn(lend._id)">Has this been returned?</v-btn>
                 </div>
                 <div v-if=lend.lendr.lent>
                   Your borrower has recieved this.
@@ -37,18 +37,18 @@
         </div>
         <v-divider></v-divider>
         <v-expansion-panel>
-          <v-expansion-panel-content color="teal" v-for="(borrows, i) in this.myBorrows" :key="i">
-            <div slot="header">{{borrows.title}}</div>
+          <v-expansion-panel-content color="teal" v-for="(borrow, i) in this.myBorrows" :key="i">
+            <div slot="header">{{borrow.title}}</div>
             <v-container justify-center>
               <v-card>
-                <v-list-tile-sub-title justify-center>{{borrows.description}}</v-list-tile-sub-title>
-                <div v-if=borrows.lendr.lent justify-center>
+                <v-list-tile-sub-title justify-center>{{borrow.description}}</v-list-tile-sub-title>
+                <div v-if=borrow.lendr.lent justify-center>
                   You have marked this as recieved.
                 </div>
                 <div v-else justify-center>
-                  <v-btn color="teal">Have you recieved this item?</v-btn>
+                  <v-btn color="teal" @click="validateLend(borrow._id)">Have you recieved this item?</v-btn>
                 </div>
-                <div v-if=borrows.borrower.returned justify-center>
+                <div v-if=borrow.borrower.returned justify-center>
                   This has been returned
                 </div>
                 <div v-else class="red--text" justify-center>
@@ -75,6 +75,15 @@
       },
       user() {
         return this.$store.state.user
+      }
+    },
+    methods: {
+      validateLend(lendId) {
+        this.$store.dispatch('validateLend', lendId)
+      },
+
+      validateReturn(lendId) {
+        this.$store.dispatch('validateReturn', lendId)
       }
     }
   }

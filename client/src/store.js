@@ -141,6 +141,12 @@ export default new Vuex.Store({
         .then(() => {
           dispatch('authenticate')
         })
+    },
+    validateLend({ commit, dispatch }, lendId) {
+      console.log("Validating Lend with id:" + lendId)
+    },
+    validateReturn({ commit, dispatch }, lendId) {
+      console.log("Validating Return with id:" + lendId)
     }
   }
 })
