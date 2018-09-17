@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from './router'
+// SOCKETS
+import io from 'socket.io-client'
+let socket = {}
+
 
 let auth = axios.create({
   baseURL: "//localhost:3000/auth/",
@@ -22,7 +26,12 @@ export default new Vuex.Store({
     user: {},
     lends: [],
     borrows: [],
-    borrower: ''
+    borrower: '',
+    // SOCKETS
+    joined: false,
+    name: '',
+    messages: [],
+    roomData: {}
   },
   mutations: {
     setUser(state, user) {
@@ -36,6 +45,29 @@ export default new Vuex.Store({
     },
     setBorrower(state, borrower) {
       state.borrower = borrower
+    },
+    // SOCKETS
+    setJoined(state, payload) {
+      state.joined = true
+      state.name = payload;
+    },
+    setRoom(state, payload) {
+      state.roomData = payload
+    },
+    newUser(state, payload) {
+      Vue.set(state.roomData.connectedUsers, payload.userName, payload.userName)
+    },
+    userLeft(state, payload) {
+      Vue.set(state.roomData.connectedUsers, payload, undefined)
+    },
+    addMessage(state, payload) {
+      state.messages.push(payload)
+    },
+    leave(state) {
+      state.joined = false,
+        state.name = '',
+        state.messages = [],
+        state.roomData = {}
     }
   },
   actions: {
@@ -171,6 +203,47 @@ export default new Vuex.Store({
         .then(() => {
           dispatch('authenticate')
         })
+      // SOCKETS
+    },
+    join({ commit, dispatch }, payload) {
+      commit('setJoined', payload);
+      dispatch('socket', payload)
+    },
+    socket({ commit, dispatch }, payload) {
+      //establish connection with socket
+      socket = io('//localhost:3000')
+
+      //register socket event listeners
+      socket.on('CONNECTED', data => {
+        console.log('Connected to socket')
+        //connect to room 
+        socket.emit('join', { name: payload })
+      })
+
+      socket.on('joinedRoom', data => {
+        commit('setRoom', data)
+      })
+
+      socket.on('newUser', data => {
+        commit('newUser', data)
+      })
+
+      socket.on('left', data => {
+        console.log('user left', data)
+        commit('userLeft', data)
+      })
+
+      socket.on('newMessage', data => {
+        commit('addMessage', data)
+      })
+    },
+    sendMessage({ commit, dispatch }, payload) {
+      socket.emit('message', payload)
+    },
+    leaveRoom({ commit, dispatch }, payload) {
+      socket.emit('leave')
+      socket.close()
+      commit('leave')
     }
   }
 })
