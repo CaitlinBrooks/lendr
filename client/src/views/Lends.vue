@@ -66,6 +66,12 @@
 <script>
   export default {
     name: 'Lends',
+    created() {
+      //blocks users not logged in
+      if (!this.$store.state.user._id) {
+        this.$router.push({ name: "home" });
+      }
+    },
     computed: {
       myLends() {
         return this.$store.state.lends

@@ -111,6 +111,12 @@
 <script>
     export default {
         name: 'Profile',
+        created() {
+            //blocks users not logged in
+            if (!this.$store.state.user._id) {
+                this.$router.push({ name: "home" });
+            }
+        },
         data() {
             return {
                 imgUrl: '',

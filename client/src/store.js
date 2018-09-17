@@ -65,10 +65,11 @@ export default new Vuex.Store({
           dispatch('getBorrows', this.state.user._id)
         })
     },
-    logout() {
+    logout({ commit }) {
       auth.delete('logout')
         .then(res => {
           router.push({ name: 'home' })
+          commit('setUser', {})
         })
     },
     //start a new lend
