@@ -48,6 +48,16 @@
             <v-flex xs12 sm6 class="hidden-xs-only mx-3 mt-2">
                 <v-date-picker color="green lighten-1" header-color="teal darken-2"></v-date-picker>
             </v-flex>
+            <v-btn block color="primary" dark @click="snackbar = true">
+                Show Snackbar
+            </v-btn>
+            <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
+                :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
+                You have unread borrows!
+                <v-btn color="pink" flat @click="snackbar = false">
+                    Close
+                </v-btn>
+            </v-snackbar>
             <v-btn color="teal accent-4" dark @click="newLend = !newLend">New Lend</v-btn>
             <!-- New Lend Form -->
             <v-dialog v-model="newLend" max-width="500px">
@@ -128,7 +138,13 @@
                 lendBorrower: '',
                 dueDate: '',
                 date: null,
-                dateMenu: false
+                dateMenu: false,
+                snackbar: false,
+                y: 'bottom',
+                x: 'right',
+                mode: '',
+                timeout: 6000,
+                text: 'Hello, I\'m a snackbar'
             }
         },
         computed: {
