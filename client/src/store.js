@@ -40,6 +40,7 @@ export default new Vuex.Store({
   },
   actions: {
     //AUTH STUFF
+    // @ts-ignore
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
         .then(res => {
@@ -52,7 +53,9 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'profile' })
+          // @ts-ignore
           dispatch('getLends', this.state.user._id)
+          // @ts-ignore
           dispatch('getBorrows', this.state.user._id)
         })
     },
@@ -61,21 +64,26 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'profile' })
+          // @ts-ignore
           dispatch('getLends', this.state.user._id)
+          // @ts-ignore
           dispatch('getBorrows', this.state.user._id)
         })
     },
     logout({ commit }) {
       auth.delete('logout')
+        // @ts-ignore
         .then(res => {
           router.push({ name: 'home' })
           commit('setUser', {})
         })
     },
     //start a new lend
+    // @ts-ignore
     addLend({ commit, dispatch }, newLend) {
       //most likely going to have to create newLend object above that has a lendId
       api.post('lend', newLend)
+        // @ts-ignore
         .then(res => {
           dispatch('getAllLends')
           //need this method to build/draw profile
@@ -93,8 +101,10 @@ export default new Vuex.Store({
 
     },
     // I still need to check routes on this to make sure they match up
+    // @ts-ignore
     deleteLend({ dispatch, commit }, lendId) {
       api.delete('lend/' + lendId)
+        // @ts-ignore
         .then(res => {
           dispatch('getAllLends')
         })
@@ -115,6 +125,7 @@ export default new Vuex.Store({
           commit('setUser', res.data[0])
         })
     },
+    // @ts-ignore
     getLends({ commit, dispatch }, userId) {
       api.get('lend/mylends/' + userId)
         .then(res => {
@@ -133,24 +144,28 @@ export default new Vuex.Store({
           console.error(err.response.data.message)
         })
     },
+    // @ts-ignore
     findUserId({ commit, dispatch }, lendBorrower) {
       api.get('user/findByName/' + lendBorrower)
         .then(res => {
           commit('setBorrower', res.data)
         })
     },
+    // @ts-ignore
     createLend({ commit, dispatch }, lendData) {
       api.post('/lend/createLend/', lendData)
         .then(() => {
           dispatch('authenticate')
         })
     },
+    // @ts-ignore
     validateLend({ commit, dispatch }, borrow) {
       api.put('/lend/mylends/' + borrow._id, { lendr: { lent: borrow.lendr.lent = true } })
         .then(() => {
           dispatch('authenticate')
         })
     },
+    // @ts-ignore
     validateReturn({ commit, dispatch }, lend) {
       api.put('/lend/myBorrows/' + lend._id, lend.borrower.returned = true)
         .then(() => {
