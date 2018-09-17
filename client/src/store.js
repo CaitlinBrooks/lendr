@@ -239,7 +239,10 @@ export default new Vuex.Store({
       })
 
       socket.on('newMessage', data => {
-        commit('addMessage', data)
+        if (data == this.state.user._id) {
+          dispatch('getBorrows', data)
+          console.log("You have a new borrow!")
+        }
         // This needs to target a specific user and refresh with borrows by ID.
       })
     },
