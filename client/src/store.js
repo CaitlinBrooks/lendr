@@ -120,7 +120,7 @@ export default new Vuex.Store({
         // @ts-ignore
         .then(res => {
           dispatch('getAllLends')
-          dispatch('sendMessage')
+          dispatch('sendMessage', newLend.borrower.userId)
           //need this method to build/draw profile
         })
         .catch(err => {
