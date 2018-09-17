@@ -46,9 +46,10 @@ router.put('/mylends/update/:lendId', (req, res, next) => {
 })
 
 router.put('/myborrows/update/:lendId', (req, res, next) => {
-    Lends.findById(req.params.lendid)
+    Lends.findById(req.params.lendId)
         .then(lend => {
-            lend.lendr.findByIdAndUpdate(req.body.lendr._id, { lent: true })
+            lend.lendr.lent = true
+            lend.save()
             res.send("Updated Successfully")
         })
 })
