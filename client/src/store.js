@@ -240,6 +240,7 @@ export default new Vuex.Store({
 
       socket.on('newMessage', data => {
         commit('addMessage', data)
+        // This needs to target a specific user and refresh with borrows by ID.
       })
     },
     sendMessage({ commit, dispatch }, payload) {
