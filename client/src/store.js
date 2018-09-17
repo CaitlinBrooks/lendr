@@ -201,14 +201,15 @@ export default new Vuex.Store({
     },
     // @ts-ignore
     validateLend({ commit, dispatch }, borrow) {
-      api.put('/lend/mylends/' + borrow._id, { lendr: { lent: borrow.lendr.lent = true } })
+      borrow.lendr.lent = true
+      api.put('/lend/myBorrows/update/' + borrow._id, borrow)
         .then(() => {
-          dispatch('authenticate')
+          dispatch('getBorrows', borrow.borrower.userId)
         })
     },
     // @ts-ignore
     validateReturn({ commit, dispatch }, lend) {
-      api.put('/lend/myBorrows/' + lend._id, lend.borrower.returned = true)
+      api.put('/lend/myLends/update/' + lend._id, lend.borrower.returned = true)
         .then(() => {
           dispatch('authenticate')
         })
