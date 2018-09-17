@@ -222,7 +222,6 @@ export default new Vuex.Store({
     socket({ commit, dispatch }, payload) {
       //establish connection with socket
       socket = io('//localhost:3000')
-      debugger
       //register socket event listeners
       socket.on('CONNECTED', data => {
         console.log('Connected to socket')
