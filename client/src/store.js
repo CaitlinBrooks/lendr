@@ -120,11 +120,14 @@ export default new Vuex.Store({
         // @ts-ignore
         .then(res => {
           dispatch('getAllLends')
+          dispatch('sendMessage')
           //need this method to build/draw profile
         })
         .catch(err => {
           console.error(err.response.data.message)
         })
+      //socket time
+
 
 
     },
