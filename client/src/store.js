@@ -146,7 +146,7 @@ export default new Vuex.Store({
         })
     },
     validateLend({ commit, dispatch }, borrow) {
-      api.put('/lend/mylends/' + borrow._id, borrow.lendr.lent = true)
+      api.put('/lend/mylends/' + borrow._id, { lendr: { lent: borrow.lendr.lent = true } })
         .then(() => {
           dispatch('authenticate')
         })
