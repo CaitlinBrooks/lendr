@@ -49,6 +49,7 @@ server.use((req, res, next) => {
 
 //socket connected users
 let connectedUsers = {};
+// @ts-ignore
 let rooms = {};
 
 io.on("connection", socket => {
@@ -65,6 +66,7 @@ io.on("connection", socket => {
     //insure connection passed name
     if (data.name) {
       //attaches name to socket
+      // @ts-ignore
       socket.user = data.name;
 
       //adds connection to room
@@ -85,20 +87,28 @@ io.on("connection", socket => {
   });
 
   //connection leaves room
+  // @ts-ignore
   socket.on('leave', data => {
     //confirm they were in a room
+    // @ts-ignore
     if (socket.user) {
       //remove from connected room
+      // @ts-ignore
       delete connectedUsers[socket.user]
+      // @ts-ignore
       io.to('LendrRoom').emit('left', socket.user)
     }
   })
 
   //connection disconnectsd
+  // @ts-ignore
   socket.on('disconnect', data => {
+    // @ts-ignore
     if (socket.user) {
       //remove from connected room
+      // @ts-ignore
       delete connectedUsers[socket.user]
+      // @ts-ignore
       io.to('LendrRoom').emit('left', socket.user)
     }
   })
@@ -124,6 +134,7 @@ server.use('/api/lend', lendRoutes)
 
 
 //Catch all
+// @ts-ignore
 server.get('*', (req, res, next) => {
   res.status(404).send({
     error: 'No matching routes'
