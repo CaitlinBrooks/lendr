@@ -15,13 +15,13 @@
                                 <v-card-text>
                                     <v-form ref="form" @submit.prevent="updateProfilePicture">
                                         <v-text-field v-model="imgUrl" label="Image URL" required></v-text-field>
-                                        <v-btn type="submit" color="teal accent-4" class="white--text">
+                                        <v-btn type="submit" color="teal accent-4" class="white--text" @click="changeImg = false">
                                             Submit
                                         </v-btn>
                                     </v-form>
                                 </v-card-text>
                                 <v-card-actions>
-                                    <v-btn color="teal accent-4" flat @click="changeImg=false">Close</v-btn>
+                                    <v-btn color="teal accent-4" flat @click="changeImg = false">Close</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
