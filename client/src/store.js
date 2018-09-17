@@ -117,9 +117,9 @@ export default new Vuex.Store({
     addLend({ commit, dispatch }, newLend) {
       //most likely going to have to create newLend object above that has a lendId
       api.post('lend', newLend)
-        // @ts-ignore
         .then(res => {
-          dispatch('getAllLends')
+          debugger
+          dispatch('getLends')
           dispatch('sendMessage', newLend.borrower.userId)
           //need this method to build/draw profile
         })
@@ -191,8 +191,13 @@ export default new Vuex.Store({
     // @ts-ignore
     createLend({ commit, dispatch }, lendData) {
       api.post('/lend/createLend/', lendData)
-        .then(() => {
-          dispatch('authenticate')
+        .then(res => {
+          dispatch('getLends')
+          dispatch('sendMessage', lendData.borrower.userId)
+          //need this method to build/draw profile
+        })
+        .catch(err => {
+          console.error(err.response.data.message)
         })
     },
     // @ts-ignore
@@ -217,7 +222,7 @@ export default new Vuex.Store({
     socket({ commit, dispatch }, payload) {
       //establish connection with socket
       socket = io('//localhost:3000')
-
+      debugger
       //register socket event listeners
       socket.on('CONNECTED', data => {
         console.log('Connected to socket')

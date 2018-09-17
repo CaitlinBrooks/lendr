@@ -67,6 +67,7 @@
     },
     computed: {
       currentRoute() {
+        console.log('hackzord')
         return this.$route.name
       }
     },
