@@ -68,19 +68,19 @@ io.on("connection", socket => {
       socket.user = data.name;
 
       //adds connection to room
-      socket.join("BCW");
+      socket.join("LendrRoom");
 
       //adds user to connectedUsers
       connectedUsers[data.name] = data.name;
 
       //notify connection of room connection
       socket.emit("joinedRoom", {
-        roomName: "BCW",
+        roomName: "LendrRoom",
         connectedUsers: connectedUsers
       });
 
       //notify room of new connection
-      io.to("BCW").emit("newUser", { userName: data.name });
+      io.to("LendrRoom").emit("newUser", { userName: data.name });
     }
   });
 
@@ -90,7 +90,7 @@ io.on("connection", socket => {
     if (socket.user) {
       //remove from connected room
       delete connectedUsers[socket.user]
-      io.to('BCW').emit('left', socket.user)
+      io.to('LendrRoom').emit('left', socket.user)
     }
   })
 
@@ -99,14 +99,14 @@ io.on("connection", socket => {
     if (socket.user) {
       //remove from connected room
       delete connectedUsers[socket.user]
-      io.to('BCW').emit('left', socket.user)
+      io.to('LendrRoom').emit('left', socket.user)
     }
   })
 
   socket.on('message', data => {
-    if (data.message && data.user) {
+    if (data) {
       console.log('message received')
-      io.to('BCW').emit('newMessage', data)
+      io.to('LendrRoom').emit('newMessage', data)
     }
   })
 
