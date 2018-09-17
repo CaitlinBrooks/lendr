@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from './router'
+// SOCKETS
+import io from 'socket.io-client'
+let socket = {}
+
 
 let auth = axios.create({
   baseURL: "//localhost:3000/auth/",
@@ -22,7 +26,12 @@ export default new Vuex.Store({
     user: {},
     lends: [],
     borrows: [],
-    borrower: ''
+    borrower: '',
+    // SOCKETS
+    joined: false,
+    name: '',
+    messages: [],
+    roomData: {}
   },
   mutations: {
     setUser(state, user) {
@@ -36,10 +45,34 @@ export default new Vuex.Store({
     },
     setBorrower(state, borrower) {
       state.borrower = borrower
+    },
+    // SOCKETS
+    setJoined(state, payload) {
+      state.joined = true
+      state.name = payload;
+    },
+    setRoom(state, payload) {
+      state.roomData = payload
+    },
+    newUser(state, payload) {
+      Vue.set(state.roomData.connectedUsers, payload.userName, payload.userName)
+    },
+    userLeft(state, payload) {
+      Vue.set(state.roomData.connectedUsers, payload, undefined)
+    },
+    addMessage(state, payload) {
+      state.messages.push(payload)
+    },
+    leave(state) {
+      state.joined = false,
+        state.name = '',
+        state.messages = [],
+        state.roomData = {}
     }
   },
   actions: {
     //AUTH STUFF
+    // @ts-ignore
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
         .then(res => {
@@ -52,7 +85,9 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'profile' })
+          // @ts-ignore
           dispatch('getLends', this.state.user._id)
+          // @ts-ignore
           dispatch('getBorrows', this.state.user._id)
         })
     },
@@ -61,21 +96,26 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           router.push({ name: 'profile' })
+          // @ts-ignore
           dispatch('getLends', this.state.user._id)
+          // @ts-ignore
           dispatch('getBorrows', this.state.user._id)
         })
     },
     logout({ commit }) {
       auth.delete('logout')
+        // @ts-ignore
         .then(res => {
           router.push({ name: 'home' })
           commit('setUser', {})
         })
     },
     //start a new lend
+    // @ts-ignore
     addLend({ commit, dispatch }, newLend) {
       //most likely going to have to create newLend object above that has a lendId
       api.post('lend', newLend)
+        // @ts-ignore
         .then(res => {
           dispatch('getAllLends')
           //need this method to build/draw profile
@@ -93,8 +133,10 @@ export default new Vuex.Store({
 
     },
     // I still need to check routes on this to make sure they match up
+    // @ts-ignore
     deleteLend({ dispatch, commit }, lendId) {
       api.delete('lend/' + lendId)
+        // @ts-ignore
         .then(res => {
           dispatch('getAllLends')
         })
@@ -115,6 +157,7 @@ export default new Vuex.Store({
           commit('setUser', res.data[0])
         })
     },
+    // @ts-ignore
     getLends({ commit, dispatch }, userId) {
       api.get('lend/mylends/' + userId)
         .then(res => {
@@ -133,29 +176,74 @@ export default new Vuex.Store({
           console.error(err.response.data.message)
         })
     },
+    // @ts-ignore
     findUserId({ commit, dispatch }, lendBorrower) {
       api.get('user/findByName/' + lendBorrower)
         .then(res => {
           commit('setBorrower', res.data)
         })
     },
+    // @ts-ignore
     createLend({ commit, dispatch }, lendData) {
       api.post('/lend/createLend/', lendData)
         .then(() => {
           dispatch('authenticate')
         })
     },
+    // @ts-ignore
     validateLend({ commit, dispatch }, borrow) {
       api.put('/lend/mylends/' + borrow._id, { lendr: { lent: borrow.lendr.lent = true } })
         .then(() => {
           dispatch('authenticate')
         })
     },
+    // @ts-ignore
     validateReturn({ commit, dispatch }, lend) {
       api.put('/lend/myBorrows/' + lend._id, lend.borrower.returned = true)
         .then(() => {
           dispatch('authenticate')
         })
+      // SOCKETS
+    },
+    join({ commit, dispatch }, payload) {
+      commit('setJoined', payload);
+      dispatch('socket', payload)
+    },
+    socket({ commit, dispatch }, payload) {
+      //establish connection with socket
+      socket = io('//localhost:3000')
+
+      //register socket event listeners
+      socket.on('CONNECTED', data => {
+        console.log('Connected to socket')
+        //connect to room 
+        socket.emit('join', { name: payload })
+      })
+
+      socket.on('joinedRoom', data => {
+        commit('setRoom', data)
+      })
+
+      socket.on('newUser', data => {
+        commit('newUser', data)
+      })
+
+      socket.on('left', data => {
+        console.log('user left', data)
+        commit('userLeft', data)
+      })
+
+      socket.on('newMessage', data => {
+        commit('addMessage', data)
+      })
+    },
+    sendMessage({ commit, dispatch }, payload) {
+      socket.emit('message', payload)
+    },
+    leaveRoom({ commit, dispatch }, payload) {
+      socket.emit('leave')
+      socket.close()
+      commit('leave')
     }
   }
 })
