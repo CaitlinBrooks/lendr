@@ -6,7 +6,7 @@ var port = 3000
 
 //Server for socket
 var app = require("http").createServer(server);
-var io = require("socket.io")(app, { origins: '*:*' });
+var io = require("socket.io")(app);
 
 
 
@@ -68,10 +68,7 @@ server.get('*', (req, res, next) => {
 })
 
 
-server.listen(port, () => {
-  console.log('server running on port', port)
-  //socket connected users
-})
+
 let connectedUsers = {};
 // @ts-ignore
 let rooms = {};
@@ -145,3 +142,8 @@ io.on("connection", socket => {
   })
 
 });
+
+app.listen(port, () => {
+  console.log('server running on port', port)
+  //socket connected users
+})
