@@ -244,6 +244,7 @@ export default new Vuex.Store({
       socket.on('newMessage', data => {
         // @ts-ignore
         console.log("message for" + data)
+        // @ts-ignore
         if (data == this.state.user._id) {
           dispatch('getBorrows', data)
           console.log("You have a new borrow!")
