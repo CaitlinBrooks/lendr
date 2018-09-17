@@ -89,6 +89,8 @@ export default new Vuex.Store({
           dispatch('getLends', this.state.user._id)
           // @ts-ignore
           dispatch('getBorrows', this.state.user._id)
+          // @ts-ignore
+          dispatch('join', this.state.user._id)
         })
     },
     login({ commit, dispatch }, creds) {
