@@ -118,7 +118,6 @@ export default new Vuex.Store({
       //most likely going to have to create newLend object above that has a lendId
       api.post('lend', newLend)
         .then(res => {
-          debugger
           dispatch('getLends')
           dispatch('sendMessage', newLend.borrower.userId)
           //need this method to build/draw profile
