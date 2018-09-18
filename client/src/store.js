@@ -33,7 +33,7 @@ export default new Vuex.Store({
     messages: [],
     roomData: {},
     snackbar: false,
-    rating: 3
+    rating: 0
   },
   mutations: {
     setUser(state, user) {
@@ -67,6 +67,9 @@ export default new Vuex.Store({
         state.name = '',
         state.messages = [],
         state.roomData = {}
+    },
+    setRating(state) {
+      state.rating = 0
     }
   },
   actions: {

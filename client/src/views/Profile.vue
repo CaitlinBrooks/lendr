@@ -40,8 +40,10 @@
                 <v-card-actions class="pa-3">
                     Your rating
                     <v-spacer></v-spacer>
-                    <v-rating v-model="rating" color="orange"></v-rating>
-                    <v-btn @click="sendRating">Send Rating</v-btn>
+                    <v-flex>
+                        <v-rating v-model="rating" color="orange"></v-rating>
+                        <v-btn @click="sendRating">Rate This User</v-btn>
+                    </v-flex>
                 </v-card-actions>
             </v-card>
         </v-flex>
