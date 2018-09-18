@@ -47,8 +47,7 @@
         <v-layout row wrap>
             <!-- CALENDAR -->
             <v-flex xs12 sm6 class="my-3">
-                <v-date-picker v-model="myCal" :events="dueDates" :event-color="date => date[9] % 2 ? 'red' : 'green'" color="green lighten-1"
-                    header-color="teal darken-2"></v-date-picker>
+                <v-date-picker v-model="myCal" :events="dueDates" :event-color="date => checkDate(date)" color="green lighten-1" header-color="teal darken-2"></v-date-picker>
             </v-flex>
             <!-- SNACKBAR STUFF -->
             <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
@@ -196,6 +195,18 @@
             },
             viewLends() {
                 this.$router.push('Lends')
+            },
+            checkDate(date) {
+                let today = new Date()
+                if (parseInt(date[5] + date[6]) < today.getMonth() + 1) {
+                    return "red"
+                }
+                else if (parseInt(date[8] + date[9]) < today.getDate()) {
+                    return "red"
+                }
+                else {
+                    return "green"
+                }
             }
         },
         components: {}
