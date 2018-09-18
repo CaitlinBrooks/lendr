@@ -11,8 +11,7 @@ router.post('/createLend', (req, res, next) => {
             res.send(newLend)
         })
         .catch(err => {
-            console.log(err)
-            next()
+            res.status(400).send(err)
         })
 })
 
