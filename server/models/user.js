@@ -15,7 +15,7 @@ let schema = new Schema({
   password: { type: String, required: true },
   created: { type: Number, required: true, default: Date.now() },
   picture: { type: String, default: "https://i.imgur.com/zSb0HR7.png", required: true },
-  rating: { type: Array, default: [] }
+  rating: { type: Array, default: [], required: true }
 })
 
 

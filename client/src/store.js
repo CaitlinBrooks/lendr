@@ -156,6 +156,12 @@ export default new Vuex.Store({
           dispatch('getUser')
         })
     },
+    updateRating({ dispatch, commit }, userData) {
+      api.put('user/addrating', userData)
+        .then(() => {
+          dispatch('getUser')
+        })
+    }
     getUser({ commit }) {
       api.get('user')
         .then(res => {
