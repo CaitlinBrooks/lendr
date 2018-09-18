@@ -33,7 +33,7 @@ export default new Vuex.Store({
     messages: [],
     roomData: {},
     snackbar: false,
-    rating: 0
+    rating: 3
   },
   mutations: {
     setUser(state, user) {

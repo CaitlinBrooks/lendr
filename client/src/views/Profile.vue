@@ -42,7 +42,26 @@
                     <v-spacer></v-spacer>
                     <v-flex>
                         <v-rating v-model="rating" color="orange"></v-rating>
-                        <v-btn @click="sendRating">Rate This User</v-btn>
+                        <v-btn @click="rateUser = true">Rate This User</v-btn>
+                        <v-dialog v-model="rateUser" max-width="290">
+                            <v-card>
+                                <v-card-title class="headline">How would you rate this user?</v-card-title>
+
+                                <v-rating v-model="newRating" color="orange"></v-rating>
+
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+
+                                    <v-btn color="green darken-1" flat="flat" @click="rateUser = false">
+                                        Cancel
+                                    </v-btn>
+
+                                    <v-btn color="green darken-1" flat="flat" @click="sendRating">
+                                        Rate
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
                     </v-flex>
                 </v-card-actions>
             </v-card>
@@ -148,7 +167,8 @@
                 mode: '',
                 timeout: 6000,
                 myCal: null,
-                newRating: 0
+                newRating: 0,
+                rateUser: false
             }
         },
         computed: {
@@ -216,7 +236,8 @@
                 }
             },
             sendRating() {
-                console.log(this.rating)
+                console.log(this.newRating)
+                this.rateUser = false
             }
         },
         components: {}
