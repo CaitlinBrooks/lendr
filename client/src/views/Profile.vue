@@ -48,7 +48,8 @@
             <v-flex xs12 sm6 class="hidden-xs-only mx-3 mt-2">
                 <v-date-picker color="green lighten-1" header-color="teal darken-2"></v-date-picker>
             </v-flex>
-            <v-btn block color="primary" dark @click="snackbar = true">
+            <!-- SNACKBAR STUFF -->
+            <v-btn color="primary" dark @click="testSomeStuff">
                 Show Snackbar
             </v-btn>
             <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
@@ -139,7 +140,7 @@
                 dueDate: '',
                 date: null,
                 dateMenu: false,
-                snackbar: false,
+                snackbar: this.$store.state.snackbar,
                 y: 'bottom',
                 x: 'right',
                 mode: '',
@@ -188,8 +189,8 @@
             findUserId() {
                 this.$store.dispatch('findUserId', this.lendBorrower)
             },
-            testSomeStuff(lendData) {
-                console.log(lendData)
+            testSomeStuff() {
+                this.$store.dispatch('showSnackbar')
             }
         },
         components: {}

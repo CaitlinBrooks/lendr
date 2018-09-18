@@ -31,7 +31,8 @@ export default new Vuex.Store({
     joined: false,
     name: '',
     messages: [],
-    roomData: {}
+    roomData: {},
+    snackbar: false
   },
   mutations: {
     setUser(state, user) {
@@ -45,6 +46,9 @@ export default new Vuex.Store({
     },
     setBorrower(state, borrower) {
       state.borrower = borrower
+    },
+    changeSnackbar(state) {
+      state.snackbar = true
     },
     // SOCKETS
     setJoined(state, payload) {
@@ -214,8 +218,11 @@ export default new Vuex.Store({
         .then(() => {
           dispatch('getLends', lend.lender.userId)
         })
-      // SOCKETS
     },
+    showSnackbar({ commit }) {
+      commit('changeSnackbar')
+    },
+    // SOCKETS
     join({ commit, dispatch }, payload) {
       commit('setJoined', payload);
       dispatch('socket', payload)
