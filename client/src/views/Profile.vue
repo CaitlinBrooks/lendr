@@ -52,7 +52,7 @@
             <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
                 :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
                 You have unread borrows!
-                <v-btn color="pink" flat @click="snackbar = false">
+                <v-btn color="pink" flat @click="viewLends">
                     View
                 </v-btn>
             </v-snackbar>
