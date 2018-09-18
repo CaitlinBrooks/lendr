@@ -47,7 +47,8 @@
         <v-layout row wrap>
             <!-- CALENDAR -->
             <v-flex xs12 sm6 class="my-3">
-                <v-date-picker v-model="myCal" :events="dueDates" event-color="green" color="green lighten-1" header-color="teal darken-2"></v-date-picker>
+                <v-date-picker v-model="myCal" :events="dueDates" :event-color="date => date[9] % 2 ? 'red' : 'green'" color="green lighten-1"
+                    header-color="teal darken-2"></v-date-picker>
             </v-flex>
             <!-- SNACKBAR STUFF -->
             <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
