@@ -40,7 +40,8 @@
                 <v-card-actions class="pa-3">
                     Your rating
                     <v-spacer></v-spacer>
-                    <v-rating color="orange"></v-rating>
+                    <v-rating v-model="rating" color="orange"></v-rating>
+                    <v-btn @click="sendRating">Send Rating</v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -144,7 +145,8 @@
                 x: 'right',
                 mode: '',
                 timeout: 6000,
-                myCal: null
+                myCal: null,
+                newRating: 0
             }
         },
         computed: {
@@ -162,6 +164,9 @@
             },
             dueDates() {
                 return this.$store.getters.dueDates
+            },
+            rating() {
+                return this.$store.state.rating
             }
         },
         methods: {
@@ -207,6 +212,9 @@
                 else {
                     return "green"
                 }
+            },
+            sendRating() {
+                console.log(this.rating)
             }
         },
         components: {}
