@@ -195,7 +195,7 @@ export default new Vuex.Store({
     createLend({ commit, dispatch }, lendData) {
       api.post('/lend/createLend/', lendData)
         .then(res => {
-          dispatch('getLends')
+          dispatch('getLends', lendData.lendr.userId)
           dispatch('sendMessage', lendData.borrower.userId)
           //need this method to build/draw profile
         })
