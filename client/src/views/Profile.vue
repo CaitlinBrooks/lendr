@@ -41,7 +41,7 @@
                     Your rating
                     <v-spacer></v-spacer>
                     <v-flex>
-                        <v-rating v-model="rating" color="orange"></v-rating>
+                        <v-rating v-model="rating" readonly color="orange"></v-rating>
                         <v-btn @click="rateUser = true">Rate This User</v-btn>
                         <v-dialog v-model="rateUser" max-width="290">
                             <v-card>
