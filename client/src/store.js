@@ -209,9 +209,10 @@ export default new Vuex.Store({
     },
     // @ts-ignore
     validateReturn({ commit, dispatch }, lend) {
-      api.put('/lend/myLends/update/' + lend._id, lend.borrower.returned = true)
+      lend.lendr.lent = true
+      api.put('/lend/myLends/update/' + lend._id, lend)
         .then(() => {
-          dispatch('authenticate')
+          dispatch('getLends', lend.lender.userId)
         })
       // SOCKETS
     },

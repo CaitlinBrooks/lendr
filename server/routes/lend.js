@@ -39,10 +39,12 @@ router.get('/myborrows/:borrowerId', (req, res, next) => {
 })
 
 router.put('/mylends/update/:lendId', (req, res, next) => {
-    Lends.findByIdAndUpdate(req.params.lendid, req.body)
-        .then(() => res.send({
-            message: "Lend validated!"
-        }))
+    Lends.findById(req.params.lendId)
+        .then(lend => {
+            lend.borrower.returned = true
+            lend.save()
+            res.send("Updated Successfully")
+        })
 })
 
 router.put('/myborrows/update/:lendId', (req, res, next) => {
