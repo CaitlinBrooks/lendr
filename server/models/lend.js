@@ -17,7 +17,7 @@ let schema = new Schema({
     title: { type: String, required: true, unique: true },
     description: { type: String, default: "item" },
     created: { type: Number, required: true, default: Date.now() },
-    dueDate: { type: Number, required: true },
+    dueDate: { type: String, required: true },
     lendr: lendr,
     borrower: borrower
 })
