@@ -68,12 +68,12 @@
                             <v-text-field v-model="lendTitle" label="Title" required></v-text-field>
                             <v-text-field v-model="lendDescription" label="Item Description" required></v-text-field>
                             <v-text-field v-model="lendBorrower" label="Who Is This For?" required></v-text-field>
-                            date picker
+                            <!-- date picker -->
                             <v-flex xs12 sm6 md4>
                                 <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40" :return-value.sync="dateMenu" lazy transition="scale-transition"
                                     offset-y full-width min-width="290px">
-                                    <v-text-field slot="activator" v-model="dueDate" label="Due Date" prepend-icon="event" readonly></v-text-field>
-                                    <v-date-picker v-model="dateMenu" no-title scrollable>
+                                    <v-text-field slot="activator" v-model="date" label="Due Date" prepend-icon="event" readonly></v-text-field>
+                                    <v-date-picker v-model="date" no-title scrollable>
                                         <v-spacer></v-spacer>
                                         <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
                                         <v-btn flat color="primary" @click="$refs.menu.save(dateMenu)">OK</v-btn>
@@ -169,7 +169,7 @@
                     lendr: {
                         userId: this.user._id
                     },
-                    dueDate: this.dueDate
+                    dueDate: this.date
                 }
                 this.$store.dispatch('createLend', lendData)
                 this.newLend = false
