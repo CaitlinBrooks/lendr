@@ -61,12 +61,6 @@ export default new Vuex.Store({
     newUser(state, payload) {
       Vue.set(state.roomData.connectedUsers, payload.userName, payload.userName)
     },
-    userLeft(state, payload) {
-      Vue.set(state.roomData.connectedUsers, payload, undefined)
-    },
-    addMessage(state, payload) {
-      state.messages.push(payload)
-    },
     leave(state) {
       state.joined = false,
         state.name = '',
@@ -251,10 +245,6 @@ export default new Vuex.Store({
         commit('newUser', data)
       })
 
-      socket.on('left', data => {
-        console.log('user left', data)
-        commit('userLeft', data)
-      })
 
       socket.on('newMessage', data => {
         // @ts-ignore
