@@ -47,8 +47,8 @@ export default new Vuex.Store({
     setBorrower(state, borrower) {
       state.borrower = borrower
     },
-    changeSnackbar(state) {
-      state.snackbar = true
+    changeSnackbar(state, snackbar) {
+      state.snackbar = snackbar
     },
     // SOCKETS
     setJoined(state, payload) {
@@ -219,8 +219,14 @@ export default new Vuex.Store({
           dispatch('getLends', lend.lender.userId)
         })
     },
-    showSnackbar({ commit }) {
-      commit('changeSnackbar')
+    hideSnackbar({ commit }) {
+      commit('changeSnackbar', false)
+    },
+    showSnackbar({ commit, dispatch }) {
+      commit('changeSnackbar', true)
+      setTimeout(() => {
+        dispatch('hideSnackbar')
+      }, 6000);
     },
     // SOCKETS
     join({ commit, dispatch }, payload) {
@@ -256,6 +262,7 @@ export default new Vuex.Store({
         // @ts-ignore
         if (data == this.state.user._id) {
           dispatch('getBorrows', data)
+          dispatch('showSnackbar')
           console.log("You have a new borrow!")
         }
         // This needs to target a specific user and refresh with borrows by ID.

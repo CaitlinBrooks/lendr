@@ -140,7 +140,6 @@
                 dueDate: '',
                 date: null,
                 dateMenu: false,
-                snackbar: this.$store.state.snackbar,
                 y: 'bottom',
                 x: 'right',
                 mode: '',
@@ -157,6 +156,9 @@
             },
             borrows() {
                 return this.$store.state.borrows
+            },
+            snackbar() {
+                return this.$store.state.snackbar
             }
         },
         methods: {
