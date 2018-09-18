@@ -161,7 +161,7 @@ export default new Vuex.Store({
         .then(() => {
           dispatch('getUser')
         })
-    }
+    },
     getUser({ commit }) {
       api.get('user')
         .then(res => {
