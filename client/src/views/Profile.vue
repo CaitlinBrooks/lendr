@@ -104,6 +104,8 @@
                         <div class="body-1">{{this.lendDescription}}</div>
                         <div class="subheading">Borrower</div>
                         <div class="body-1">{{this.lendBorrower}}</div>
+                        <div class="subheading">Due Date</div>
+                        <div class="body-1">{{this.date}}</div>
                     </v-card-text>
                     <v-btn @click="createLend">Confirm Lend</v-btn>
                     <v-card-actions>
