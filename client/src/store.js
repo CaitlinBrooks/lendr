@@ -266,6 +266,14 @@ export default new Vuex.Store({
       socket.close()
       commit('leave')
     }
+  },
+  getters: {
+    dueDates(state) {
+      let dates = []
+      state.lends.forEach(lend => dates.push(lend.dueDate))
+      state.borrows.forEach(borrow => dates.push(borrow.dueDate))
+      return dates
+    }
   }
 })
 
