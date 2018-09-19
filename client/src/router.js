@@ -6,7 +6,9 @@ import Home from './views/Home.vue'
 import Profile from './views/Profile.vue'
 // @ts-ignore
 import Lends from './views/Lends.vue'
+// @ts-ignore
 import FriendProfile from './views/FriendProfile.vue'
+// @ts-ignore
 import SearchUsers from './views/SearchUsers.vue'
 
 

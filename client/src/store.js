@@ -7,15 +7,16 @@ import io from 'socket.io-client'
 import { userInfo } from 'os';
 let socket = {}
 
-
+var production = !window.location.host.includes('localhost');
+var baseUrl = production ? '//lendr-app.herokuapp.com/' : '//localhost:3000/';
 let auth = axios.create({
-  baseURL: "//localhost:3000/auth/",
+  baseURL: baseUrl + "auth/",
   timeout: 3000,
   withCredentials: true
 })
 
 let api = axios.create({
-  baseURL: '//localhost:3000/api/',
+  baseURL: baseUrl + "api/",
   timeout: 60000,
   withCredentials: true
 })
