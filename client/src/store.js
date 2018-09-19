@@ -75,7 +75,7 @@ export default new Vuex.Store({
     },
     setSearchedUser(state, user) {
       state.searchedUser = user
-      router.push({ name: 'profile' })
+      router.push({ name: 'user' })
     }
   },
   actions: {

@@ -25,7 +25,7 @@ export default new Router({
       component: Profile
     },
     {
-      path: '/user/:userId',
+      path: '/user',
       name: 'user',
       component: FriendProfile
     },

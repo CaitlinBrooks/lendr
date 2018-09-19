@@ -1,5 +1,171 @@
 <template>
-  <div>
-    THIS IS A SECOND PROFILE
+  <div class="Profile">
+    <v-flex xs12 mx-3 mt-2 elevation-2>
+      <v-card color="teal" class="white--text">
+        <v-layout row>
+          <v-flex xs-5 py-1 style="justify-content: center;">
+            <v-img :src=this.user.picture height="125px" contain>
+            </v-img>
+          </v-flex>
+          <v-flex xs-7>
+            <v-card-title primary-title style="justify-content: center;">
+              <div>
+                <div class="headline">Welcome, {{this.user.name}}</div>
+              </div>
+            </v-card-title>
+          </v-flex>
+        </v-layout>
+        <v-divider light></v-divider>
+        <v-card-actions class="pa-3">
+          <v-flex>
+            User's rating
+            <v-rating v-model="rating" readonly color="orange"></v-rating>
+            <v-btn @click="rateUser = true">Rate This User</v-btn>
+            <v-dialog v-model="rateUser" max-width="290">
+              <v-card>
+                <v-card-title class="headline">How would you rate this user?</v-card-title>
+
+                <v-rating v-model="newRating" color="orange"></v-rating>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="green darken-1" flat="flat" @click="rateUser = false">
+                    Cancel
+                  </v-btn>
+                  <v-btn color="green darken-1" flat="flat" @click="sendRating">
+                    Rate
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-flex>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
+    <v-layout row wrap>
+      <!-- CALENDAR -->
+      <v-flex xs12 sm6 class="my-3 mx-3">
+        <v-date-picker v-model="myCal" :events="dueDates" :event-color="date => checkDate(date)" color="green lighten-1" header-color="teal darken-2"></v-date-picker>
+      </v-flex>
+      <!-- SNACKBAR STUFF -->
+      <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
+        :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
+        You have unread borrows!
+        <v-btn color="pink" flat @click="viewLends">
+          View
+        </v-btn>
+      </v-snackbar>
+      <!-- New Lend Form -->
+      <v-dialog v-model="newLend" max-width="500px">
+        <v-card>
+          <v-card-title>
+            Create New Lend
+          </v-card-title>
+          <v-card-text>
+            <v-form ref="form" @submit.prevent="findUserId">
+              <v-text-field v-model="lendTitle" label="Title" required></v-text-field>
+              <v-text-field v-model="lendDescription" label="Item Description" required></v-text-field>
+              <v-text-field v-model="lendBorrower" label="Who Is This For?" required></v-text-field>
+              <!-- date picker -->
+              <v-flex xs12 sm6 md4>
+                <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40" :return-value.sync="dateMenu" lazy transition="scale-transition"
+                  offset-y full-width min-width="290px">
+                  <v-text-field slot="activator" v-model="date" label="Due Date" prepend-icon="event" readonly></v-text-field>
+                  <v-date-picker v-model="date" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+                    <v-btn flat color="primary" @click="$refs.menu.save(dateMenu)">OK</v-btn>
+                  </v-date-picker>
+                </v-menu>
+              </v-flex>
+              <v-btn type="submit" color="teal accent-4" class="white--text" @click="confirmLend = !confirmLend">
+                Submit
+              </v-btn>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="teal accent-4" flat @click="newLend=false">Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <!-- CONFIRMATION -->
+      <v-dialog v-model="confirmLend" max-width="500px">
+        <v-card>
+          <v-card-title>
+            Confirm New Lend
+          </v-card-title>
+          <v-card-text text-center>
+            <div class="title">Are you sure you want to create this lend?</div>
+            <div class="subheading">Title</div>
+            <div class="body-1">{{this.lendTitle}}</div>
+            <div class="subheading">Description</div>
+            <div class="body-1">{{this.lendDescription}}</div>
+            <div class="subheading">Borrower</div>
+            <div class="body-1">{{this.lendBorrower}}</div>
+            <div class="subheading">Due Date</div>
+            <div class="body-1">{{this.date}}</div>
+          </v-card-text>
+          <v-btn @click="createLend">Confirm Lend</v-btn>
+          <v-card-actions>
+            <v-btn color="teal accent-4" flat @click="confirmLend=false">Cancel</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
   </div>
 </template>
+
+<script>
+  export default {
+    name: 'Profile',
+    created() {
+      //blocks users not logged in
+      if (!this.$store.state.user._id) {
+        this.$router.push({ name: "home" });
+      }
+    },
+    data() {
+      return {
+        imgUrl: '',
+        changeImg: false,
+        newLend: false,
+        confirmLend: false,
+        lendTitle: '',
+        lendDescription: '',
+        lendBorrower: '',
+        date: null,
+        dateMenu: false,
+        menu: false,
+        y: 'bottom',
+        x: 'right',
+        mode: '',
+        timeout: 6000,
+        myCal: null,
+        newRating: 0,
+        rateUser: false
+      }
+    },
+    computed: {
+      user() {
+        return this.$store.state.searchedUser
+      },
+      rating() {
+        return this.$store.state.rating
+      }
+    },
+    methods: {
+      sendRating() {
+        let userInfo = {
+          rating: this.newRating,
+          userId: this.$store.state.user._id
+        }
+        this.$store.dispatch('sendRating', userInfo)
+        this.rateUser = false
+      }
+    }
+  }
+</script>
+
+
+<style scoped>
+</style>
