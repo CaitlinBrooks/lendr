@@ -1,4 +1,6 @@
-const nodemailer = require('nodemailer');
+let router = require('express').Router()
+let nodemailer = require('nodemailer');
+
 
 nodemailer.createTestAccount((err, account) => {
   let transporter = nodemailer.createTransport({
@@ -25,3 +27,5 @@ nodemailer.createTestAccount((err, account) => {
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
   });
 });
+
+module.exports = router 
