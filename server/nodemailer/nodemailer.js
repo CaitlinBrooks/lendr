@@ -5,7 +5,7 @@ let nodemailer = require('nodemailer');
 nodemailer.createTestAccount((err, account) => {
   let transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
-    port: 3000,
+    port: 587,
     secure: false,
     auth: {
       user: account.user,
