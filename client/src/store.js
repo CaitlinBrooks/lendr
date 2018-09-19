@@ -25,6 +25,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: {},
+    searchedUser: {},
     lends: [],
     borrows: [],
     borrower: '',
@@ -71,6 +72,9 @@ export default new Vuex.Store({
     },
     setRating(state, rating) {
       state.rating = rating
+    },
+    setSearchedUser(state, user) {
+      state.searchedUser = user
     }
   },
   actions: {
@@ -191,6 +195,13 @@ export default new Vuex.Store({
       api.get('/user/findByName/' + lendBorrower)
         .then(res => {
           commit('setBorrower', res.data)
+        })
+    },
+    findUser({ commit, dispatch }, username) {
+      api.get('/user/findByNameFull/' + username)
+        .then(res => {
+          commit('setSearchedUser', res.data)
+          console.log(res.data)
         })
     },
     // @ts-ignore

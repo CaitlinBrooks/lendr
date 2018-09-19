@@ -40,4 +40,11 @@ router.get('/findByName/:username', (req, res) => {
     })
 })
 
+router.get('/findByNameFull/:username', (req, res) => {
+  Users.findOne({ name: req.params.username })
+    .then(data => {
+      res.send(data)
+    })
+})
+
 module.exports = router 
