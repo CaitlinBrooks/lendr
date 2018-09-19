@@ -16,6 +16,27 @@
             </v-card-text>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="notFound" width="500">
+
+          <v-card>
+            <v-card-title class="headline grey lighten-2" primary-title>
+              User not found
+            </v-card-title>
+
+            <v-card-text>
+              Please try again with a different user name.
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" flat @click="notFound = false">
+                OK
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-layout>
     </v-slide-y-transition>
   </v-container>
@@ -27,7 +48,8 @@
     data() {
       return {
         username: '',
-        loading: false
+        loading: false,
+        notFound: false
       }
     },
     methods: {
@@ -44,7 +66,7 @@
       loading(val) {
         if (!val) return
 
-        setTimeout(() => (this.loading = false), 1000)
+        setTimeout(() => (this.loading = false) && (this.notFound = true), 1000)
 
       }
     }
