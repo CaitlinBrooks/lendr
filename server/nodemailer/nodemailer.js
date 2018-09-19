@@ -28,4 +28,5 @@ nodemailer.createTestAccount((err, account) => {
   });
 });
 
-module.exports = router 
+module.exports = router
+
