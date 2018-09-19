@@ -20,7 +20,7 @@
 
           <v-card>
             <v-card-title class="headline grey lighten-2" primary-title>
-              User not found
+              User "{{this.username}}" not found
             </v-card-title>
 
             <v-card-text>
