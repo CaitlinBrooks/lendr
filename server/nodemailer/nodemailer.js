@@ -17,7 +17,7 @@ nodemailer.createTestAccount((err, account) => {
     to: 'you@example.com',
     subject: 'Hello! Your lend is expiring soon.',
     text: 'Please check your lend history to return your item on time.',
-    // html: '' // html body
+    // html: 'html body'
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
