@@ -220,7 +220,7 @@ export default new Vuex.Store({
       lend.lendr.lent = true
       api.put('/lend/myLends/update/' + lend._id, lend)
         .then(() => {
-          dispatch('getLends', lend.lender.userId)
+          dispatch('getLends', lend.lendr.userId)
         })
     },
     hideSnackbar({ commit }) {

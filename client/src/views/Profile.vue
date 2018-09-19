@@ -7,40 +7,40 @@
                         <v-img :src=this.user.picture height="125px" contain>
                         </v-img>
                         <v-btn color="teal accent-4" dark @click="changeImg = !changeImg">Change Image</v-btn>
-                        <v-dialog v-model="changeImg" max-width="500px">
-                            <v-card>
-                                <v-card-title>
-                                    Update Profile Image
-                                </v-card-title>
-                                <v-card-text>
-                                    <v-form ref="form" @submit.prevent="updateProfilePicture">
-                                        <v-text-field v-model="imgUrl" label="Image URL" required></v-text-field>
-                                        <v-btn type="submit" color="teal accent-4" class="white--text" @click="changeImg = false">
-                                            Submit
-                                        </v-btn>
-                                    </v-form>
-                                </v-card-text>
-                                <v-card-actions>
-                                    <v-btn color="teal accent-4" flat @click="changeImg = false">Close</v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>
                     </v-flex>
-                    <v-flex xs7>
+                    <v-dialog v-model="changeImg" max-width="500px">
+                        <v-card>
+                            <v-card-title>
+                                Update Profile Image
+                            </v-card-title>
+                            <v-card-text>
+                                <v-form ref="form" @submit.prevent="updateProfilePicture">
+                                    <v-text-field v-model="imgUrl" label="Image URL" required></v-text-field>
+                                    <v-btn type="submit" color="teal accent-4" class="white--text" @click="changeImg = false">
+                                        Submit
+                                    </v-btn>
+                                </v-form>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-btn color="teal accent-4" flat @click="changeImg = false">Close</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                    <v-flex xs-7>
                         <v-card-title primary-title style="justify-content: center;">
                             <div>
                                 <div class="headline">Welcome, {{this.user.name}}</div>
                                 <div>You have {{this.lends.length}} current lends</div>
                                 <div>You have {{this.borrows.length}} current borrows</div>
+                                <v-btn color="teal accent-4" dark @click="newLend = !newLend">New Lend</v-btn>
                             </div>
                         </v-card-title>
                     </v-flex>
                 </v-layout>
                 <v-divider light></v-divider>
                 <v-card-actions class="pa-3">
-                    Your rating
-                    <v-spacer></v-spacer>
                     <v-flex>
+                        Your rating
                         <v-rating v-model="rating" readonly color="orange"></v-rating>
                         <v-btn @click="rateUser = true">Rate This User</v-btn>
                         <v-dialog v-model="rateUser" max-width="290">
@@ -79,7 +79,6 @@
                     View
                 </v-btn>
             </v-snackbar>
-            <v-btn color="teal accent-4" dark @click="newLend = !newLend">New Lend</v-btn>
             <!-- New Lend Form -->
             <v-dialog v-model="newLend" max-width="500px">
                 <v-card>
