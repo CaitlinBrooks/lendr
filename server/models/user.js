@@ -13,6 +13,7 @@ let schema = new Schema({
   //every email must be unique on the database
   username: {
     type: String, required: true, unique: true, default: function () {
+      // @ts-ignore
       return this.name.toLowerCase()
     }
   },
