@@ -7,6 +7,8 @@ import Profile from './views/Profile.vue'
 // @ts-ignore
 import Lends from './views/Lends.vue'
 import FriendProfile from './views/FriendProfile.vue'
+import SearchUsers from './views/SearchUsers.vue'
+
 
 Vue.use(Router)
 
@@ -31,6 +33,11 @@ export default new Router({
       path: '/lends',
       name: 'lends',
       component: Lends
+    },
+    {
+      path: '/searchUsers',
+      name: 'searchUsers',
+      component: SearchUsers
     }
   ]
 })
