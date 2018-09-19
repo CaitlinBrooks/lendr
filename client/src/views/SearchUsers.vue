@@ -57,16 +57,16 @@
         this.loading = true
         this.$store.dispatch('findUser', this.username)
       },
-      pushToPage() {
+      noUsers() {
         this.loading = false
-        this.$router.push('profile')
+        this.notFound = true
       }
     },
     watch: {
       loading(val) {
         if (!val) return
 
-        setTimeout(() => (this.loading = false) && (this.notFound = true), 1000)
+        setTimeout(this.noUsers, 1000)
 
       }
     }
