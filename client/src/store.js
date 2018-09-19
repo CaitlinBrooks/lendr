@@ -75,6 +75,7 @@ export default new Vuex.Store({
     },
     setSearchedUser(state, user) {
       state.searchedUser = user
+      router.push({ name: 'profile' })
     }
   },
   actions: {
@@ -200,8 +201,8 @@ export default new Vuex.Store({
     findUser({ commit, dispatch }, username) {
       api.get('/user/findByNameFull/' + username)
         .then(res => {
+          debugger
           commit('setSearchedUser', res.data)
-          console.log(res.data)
         })
     },
     // @ts-ignore
