@@ -54,8 +54,8 @@
           action: this.placeholder
         },
         {
-          title: 'Messages',
-          action: this.placeholder
+          title: 'Search Users',
+          action: this.searchUsers
         },
         {
           title: 'Logout',
@@ -86,6 +86,10 @@
 
       profilePage() {
         this.$router.push('Profile')
+      },
+
+      searchUsers() {
+        this.$router.push('SearchUsers')
       }
     }
   }
