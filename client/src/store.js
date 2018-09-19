@@ -201,7 +201,9 @@ export default new Vuex.Store({
     findUser({ commit, dispatch }, username) {
       api.get('/user/findByNameFull/' + username)
         .then(res => {
-          debugger
+          if (res.data == '') {
+            return
+          }
           commit('setSearchedUser', res.data)
         })
     },

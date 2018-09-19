@@ -11,6 +11,11 @@ const SALT = 10
 let schema = new Schema({
   name: { type: String, required: true, unique: true },
   //every email must be unique on the database
+  username: {
+    type: String, required: true, unique: true, default: function () {
+      return this.name.toLowerCase()
+    }
+  },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   created: { type: Number, required: true, default: Date.now() },

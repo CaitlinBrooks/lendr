@@ -34,14 +34,14 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/findByName/:username', (req, res) => {
-  Users.findOne({ name: req.params.username })
+  Users.findOne({ username: req.params.username.toLowerCase() })
     .then(data => {
       res.send(data._id)
     })
 })
 
 router.get('/findByNameFull/:username', (req, res) => {
-  Users.findOne({ name: req.params.username })
+  Users.findOne({ username: req.params.username.toLowerCase() })
     .then(data => {
       res.send(data)
     })
