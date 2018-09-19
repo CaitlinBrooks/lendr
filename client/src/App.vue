@@ -36,6 +36,7 @@
     name: 'App',
     data() {
       return {
+        userSearch: '',
         clipped: false,
         drawer: false,
         fixed: false,

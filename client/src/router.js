@@ -6,6 +6,7 @@ import Home from './views/Home.vue'
 import Profile from './views/Profile.vue'
 // @ts-ignore
 import Lends from './views/Lends.vue'
+import FriendProfile from './views/FriendProfile.vue'
 
 Vue.use(Router)
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/user/:userId',
+      name: 'user',
+      component: FriendProfile
     },
     {
       path: '/lends',
