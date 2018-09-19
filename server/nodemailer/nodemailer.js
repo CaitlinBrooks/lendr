@@ -1,5 +1,5 @@
 let router = require('express').Router()
-let nodemailer = require('nodemailer');
+let nodemailer = require('nodemailer'); //const?
 
 
 nodemailer.createTestAccount((err, account) => {
