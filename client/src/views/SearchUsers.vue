@@ -44,7 +44,7 @@
       loading(val) {
         if (!val) return
 
-        setTimeout(() => this.pushToPage, 1000)
+        setTimeout(() => (this.pushToPage), 1000)
       }
     }
   }
