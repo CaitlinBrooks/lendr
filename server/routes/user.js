@@ -10,6 +10,14 @@ router.put('/edit', (req, res) => {
     })
 })
 
+router.put('/rating', (req, res) => {
+  Users.findById(req.body.userId)
+    .then((user) => {
+      user.rating.push(req.body.rating)
+      user.save()
+    })
+})
+
 router.get('/', (req, res, next) => {
   // @ts-ignore
   Users.find({ _id: req.session.uid })

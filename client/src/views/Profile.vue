@@ -51,11 +51,9 @@
 
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
-
                                     <v-btn color="green darken-1" flat="flat" @click="rateUser = false">
                                         Cancel
                                     </v-btn>
-
                                     <v-btn color="green darken-1" flat="flat" @click="sendRating">
                                         Rate
                                     </v-btn>
@@ -235,7 +233,11 @@
                 }
             },
             sendRating() {
-                console.log(this.newRating)
+                let userInfo = {
+                    rating: this.newRating,
+                    userId: this.$store.state.user._id
+                }
+                this.$store.dispatch('sendRating', userInfo)
                 this.rateUser = false
             }
         },

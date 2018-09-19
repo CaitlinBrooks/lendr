@@ -4,6 +4,7 @@ import axios from 'axios'
 import router from './router'
 // SOCKETS
 import io from 'socket.io-client'
+import { userInfo } from 'os';
 let socket = {}
 
 
@@ -33,7 +34,7 @@ export default new Vuex.Store({
     messages: [],
     roomData: {},
     snackbar: false,
-    rating: 3
+    rating: null
   },
   mutations: {
     setUser(state, user) {
@@ -68,8 +69,8 @@ export default new Vuex.Store({
         state.messages = [],
         state.roomData = {}
     },
-    setRating(state) {
-      state.rating = 0
+    setRating(state, rating) {
+      state.rating = rating
     }
   },
   actions: {
@@ -86,6 +87,7 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
+          commit('setRating', (res.data.rating.reduce((a, b) => a + b, 0) / res.data.rating.length))
           router.push({ name: 'profile' })
           // @ts-ignore
           dispatch('getLends', this.state.user._id)
@@ -99,6 +101,7 @@ export default new Vuex.Store({
       auth.post('login', creds)
         .then(res => {
           commit('setUser', res.data)
+          commit('setRating', (res.data.rating.reduce((a, b) => a + b, 0) / res.data.rating.length))
           router.push({ name: 'profile' })
           // @ts-ignore
           dispatch('getLends', this.state.user._id)
@@ -156,17 +159,12 @@ export default new Vuex.Store({
           dispatch('getUser')
         })
     },
-    updateRating({ dispatch, commit }, userData) {
-      api.put('user/addrating', userData)
-        .then(() => {
-          dispatch('getUser')
-        })
-    },
-    getUser({ commit }) {
+    getUser({ commit, dispatch }) {
       api.get('user')
         .then(res => {
           console.log(res.data[0])
           commit('setUser', res.data[0])
+          commit('setRating', (res.data[0].rating.reduce((a, b) => a + b, 0) / res.data[0].rating.length))
         })
     },
     // @ts-ignore
@@ -190,7 +188,7 @@ export default new Vuex.Store({
     },
     // @ts-ignore
     findUserId({ commit, dispatch }, lendBorrower) {
-      api.get('user/findByName/' + lendBorrower)
+      api.get('/user/findByName/' + lendBorrower)
         .then(res => {
           commit('setBorrower', res.data)
         })
@@ -231,6 +229,12 @@ export default new Vuex.Store({
       setTimeout(() => {
         dispatch('hideSnackbar')
       }, 6000);
+    },
+    sendRating({ commit, dispatch }, userInfo) {
+      api.put('/user/rating', userInfo)
+        .then(() => {
+          dispatch('getUser', userInfo.userId)
+        })
     },
     // SOCKETS
     join({ commit, dispatch }, payload) {
