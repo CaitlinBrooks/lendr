@@ -15,6 +15,9 @@ router.put('/rating', (req, res) => {
     .then((user) => {
       user.rating.push(req.body.rating)
       user.save()
+      res.send({
+        message: "Updated sucessfully"
+      })
     })
 })
 

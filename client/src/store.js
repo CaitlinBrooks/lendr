@@ -16,7 +16,7 @@ let auth = axios.create({
 
 let api = axios.create({
   baseURL: '//localhost:3000/api/',
-  timeout: 3000,
+  timeout: 60000,
   withCredentials: true
 })
 
