@@ -10,7 +10,7 @@
           <v-flex xs-7>
             <v-card-title primary-title style="justify-content: center;">
               <div>
-                <div class="headline">Welcome, {{this.user.name}}</div>
+                <div class="headline">Welcome to {{this.user.name}}'s page</div>
               </div>
             </v-card-title>
           </v-flex>
@@ -43,10 +43,6 @@
       </v-card>
     </v-flex>
     <v-layout row wrap>
-      <!-- CALENDAR -->
-      <v-flex xs12 sm6 class="my-3 mx-3">
-        <v-date-picker v-model="myCal" :events="dueDates" :event-color="date => checkDate(date)" color="green lighten-1" header-color="teal darken-2"></v-date-picker>
-      </v-flex>
       <!-- SNACKBAR STUFF -->
       <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
         :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
@@ -55,62 +51,6 @@
           View
         </v-btn>
       </v-snackbar>
-      <!-- New Lend Form -->
-      <v-dialog v-model="newLend" max-width="500px">
-        <v-card>
-          <v-card-title>
-            Create New Lend
-          </v-card-title>
-          <v-card-text>
-            <v-form ref="form" @submit.prevent="findUserId">
-              <v-text-field v-model="lendTitle" label="Title" required></v-text-field>
-              <v-text-field v-model="lendDescription" label="Item Description" required></v-text-field>
-              <v-text-field v-model="lendBorrower" label="Who Is This For?" required></v-text-field>
-              <!-- date picker -->
-              <v-flex xs12 sm6 md4>
-                <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40" :return-value.sync="dateMenu" lazy transition="scale-transition"
-                  offset-y full-width min-width="290px">
-                  <v-text-field slot="activator" v-model="date" label="Due Date" prepend-icon="event" readonly></v-text-field>
-                  <v-date-picker v-model="date" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="$refs.menu.save(dateMenu)">OK</v-btn>
-                  </v-date-picker>
-                </v-menu>
-              </v-flex>
-              <v-btn type="submit" color="teal accent-4" class="white--text" @click="confirmLend = !confirmLend">
-                Submit
-              </v-btn>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="teal accent-4" flat @click="newLend=false">Close</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <!-- CONFIRMATION -->
-      <v-dialog v-model="confirmLend" max-width="500px">
-        <v-card>
-          <v-card-title>
-            Confirm New Lend
-          </v-card-title>
-          <v-card-text text-center>
-            <div class="title">Are you sure you want to create this lend?</div>
-            <div class="subheading">Title</div>
-            <div class="body-1">{{this.lendTitle}}</div>
-            <div class="subheading">Description</div>
-            <div class="body-1">{{this.lendDescription}}</div>
-            <div class="subheading">Borrower</div>
-            <div class="body-1">{{this.lendBorrower}}</div>
-            <div class="subheading">Due Date</div>
-            <div class="body-1">{{this.date}}</div>
-          </v-card-text>
-          <v-btn @click="createLend">Confirm Lend</v-btn>
-          <v-card-actions>
-            <v-btn color="teal accent-4" flat @click="confirmLend=false">Cancel</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
     </v-layout>
   </div>
 </template>

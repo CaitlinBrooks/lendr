@@ -10,6 +10,8 @@ import Lends from './views/Lends.vue'
 import FriendProfile from './views/FriendProfile.vue'
 // @ts-ignore
 import SearchUsers from './views/SearchUsers.vue'
+// @ts-ignore
+import Calandar from './views/Calandar.vue'
 
 
 Vue.use(Router)
@@ -40,6 +42,11 @@ export default new Router({
       path: '/searchUsers',
       name: 'searchUsers',
       component: SearchUsers
+    },
+    {
+      path: '/calandar',
+      name: 'calandar',
+      component: Calandar
     }
   ]
 })

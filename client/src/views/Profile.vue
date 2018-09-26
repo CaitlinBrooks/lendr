@@ -42,33 +42,11 @@
                     <v-flex>
                         Your rating
                         <v-rating v-model="rating" readonly color="orange"></v-rating>
-                        <v-btn @click="rateUser = true">Rate This User</v-btn>
-                        <v-dialog v-model="rateUser" max-width="290">
-                            <v-card>
-                                <v-card-title class="headline">How would you rate this user?</v-card-title>
-
-                                <v-rating v-model="newRating" color="orange"></v-rating>
-
-                                <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn color="green darken-1" flat="flat" @click="rateUser = false">
-                                        Cancel
-                                    </v-btn>
-                                    <v-btn color="green darken-1" flat="flat" @click="sendRating">
-                                        Rate
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>
                     </v-flex>
                 </v-card-actions>
             </v-card>
         </v-flex>
         <v-layout row wrap>
-            <!-- CALENDAR -->
-            <v-flex xs12 sm6 class="my-3 mx-3">
-                <v-date-picker v-model="myCal" :events="dueDates" :event-color="date => checkDate(date)" color="green lighten-1" header-color="teal darken-2"></v-date-picker>
-            </v-flex>
             <!-- SNACKBAR STUFF -->
             <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
                 :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
@@ -163,7 +141,6 @@
                 x: 'right',
                 mode: '',
                 timeout: 6000,
-                myCal: null,
                 newRating: 0,
                 rateUser: false
             }
@@ -180,9 +157,6 @@
             },
             snackbar() {
                 return this.$store.state.snackbar
-            },
-            dueDates() {
-                return this.$store.getters.dueDates
             },
             rating() {
                 return this.$store.state.rating
@@ -219,18 +193,6 @@
             },
             viewLends() {
                 this.$router.push('Lends')
-            },
-            checkDate(date) {
-                let today = new Date()
-                if (parseInt(date[5] + date[6]) < today.getMonth() + 1) {
-                    return "red"
-                }
-                else if (parseInt(date[8] + date[9]) < today.getDate()) {
-                    return "red"
-                }
-                else {
-                    return "green"
-                }
             },
             sendRating() {
                 let userInfo = {
