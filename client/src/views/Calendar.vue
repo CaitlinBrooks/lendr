@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: 'Calandar',
+    name: 'Calendar',
     data() {
       return {
         myCal: null
