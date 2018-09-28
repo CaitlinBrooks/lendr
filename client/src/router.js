@@ -11,7 +11,7 @@ import FriendProfile from './views/FriendProfile.vue'
 // @ts-ignore
 import SearchUsers from './views/SearchUsers.vue'
 // @ts-ignore
-import Calandar from './views/Calandar.vue'
+import Calandar from './views/Calendar.vue'
 
 
 Vue.use(Router)
@@ -44,9 +44,9 @@ export default new Router({
       component: SearchUsers
     },
     {
-      path: '/calandar',
-      name: 'calandar',
-      component: Calandar
+      path: '/calendar',
+      name: 'calendar',
+      component: Calendar
     }
   ]
 })

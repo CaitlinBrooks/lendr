@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <v-navigation-drawer persistent :mini-variant="miniVariant" :clipped="clipped" v-model="drawer" enable-resize-watcher fixed
-      app>
+    <v-navigation-drawer persistent :mini-variant="miniVariant" :clipped="clipped" v-model="drawer"
+      enable-resize-watcher fixed app>
       <v-list>
         <v-list-tile value="true" v-for="(item, i) in items" :key="i">
           <v-list-tile-content>
@@ -21,7 +21,7 @@
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>
-      <router-view/>
+      <router-view />
     </v-content>
     <v-footer :fixed="fixed" class="teal lighten-2 justify-space-between" app>
       <span class="px-3">&copy; 2018</span>
@@ -51,7 +51,7 @@
         },
         {
           title: 'My Calendar',
-          action: this.placeholder
+          action: this.calendarPage
         },
         {
           title: 'Search Users',
@@ -76,8 +76,8 @@
         this.$store.dispatch('logout')
       },
 
-      placeholder() {
-        console.log('No Function Yet!')
+      calendarPage() {
+        this.$store.dispatch('calendar')
       },
 
       lendsPage() {
