@@ -11,7 +11,7 @@ import FriendProfile from './views/FriendProfile.vue'
 // @ts-ignore
 import SearchUsers from './views/SearchUsers.vue'
 // @ts-ignore
-import Calandar from './views/Calendar.vue'
+import Calendar from './views/Calendar.vue'
 
 
 Vue.use(Router)
