@@ -77,7 +77,7 @@
       },
 
       calendarPage() {
-        this.$store.dispatch('calendar')
+        this.$router.push('Calendar')
       },
 
       lendsPage() {
