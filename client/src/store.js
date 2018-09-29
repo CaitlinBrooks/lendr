@@ -78,6 +78,8 @@ export default new Vuex.Store({
       state.searchedUser = user
       router.push({ name: 'user' })
     }
+    //adding chat part of sockets back
+
   },
   actions: {
     //AUTH STUFF
@@ -258,7 +260,7 @@ export default new Vuex.Store({
     },
     socket({ commit, dispatch }, payload) {
       //establish connection with socket
-      socket = io('//localhost:3000')
+      socket = io(baseUrl)
       //register socket event listeners
       socket.on('CONNECTED', data => {
         console.log('Connected to socket')
