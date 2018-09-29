@@ -1,7 +1,7 @@
 <template>
   <!-- CALENDAR -->
   <v-container fluid fill-height>
-    <v-layout row wrap justify-center full-height align-center>
+    <v-layout row wrap justify-center align-center>
       <v-flex xs12 sm6 class="my-3 mx-3">
         <v-flex text-xs-center>
           <p class="display-2 font-weight-medium">

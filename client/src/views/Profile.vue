@@ -1,55 +1,61 @@
 <template>
-    <div class="Profile">
-        <v-flex xs12 mx-3 mt-2 elevation-2>
-            <v-card color="teal" class="white--text">
-                <v-layout row>
-                    <v-flex xs-5 py-1 style="justify-content: center;">
-                        <v-img :src=this.user.picture height="125px" contain>
-                        </v-img>
-                        <v-btn color="teal accent-4" dark @click="changeImg = !changeImg">Change Image</v-btn>
-                    </v-flex>
-                    <v-dialog v-model="changeImg" max-width="500px">
-                        <v-card>
-                            <v-card-title>
-                                Update Profile Image
-                            </v-card-title>
-                            <v-card-text>
-                                <v-form ref="form" @submit.prevent="updateProfilePicture">
-                                    <v-text-field v-model="imgUrl" label="Image URL" required></v-text-field>
-                                    <v-btn type="submit" color="teal accent-4" class="white--text" @click="changeImg = false">
-                                        Submit
-                                    </v-btn>
-                                </v-form>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-btn color="teal accent-4" flat @click="changeImg = false">Close</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
-                    <v-flex xs-7>
-                        <v-card-title primary-title style="justify-content: center;">
-                            <div>
-                                <div class="headline">Welcome, {{this.user.name}}</div>
-                                <div>You have {{this.lends.length}} current lends</div>
-                                <div>You have {{this.borrows.length}} current borrows</div>
-                                <v-btn color="teal accent-4" dark @click="newLend = !newLend">New Lend</v-btn>
-                            </div>
-                        </v-card-title>
-                    </v-flex>
-                </v-layout>
-                <v-divider light></v-divider>
-                <v-card-actions class="pa-3">
-                    <v-flex>
-                        Your rating
-                        <v-rating v-model="rating" readonly color="orange"></v-rating>
-                    </v-flex>
-                </v-card-actions>
-            </v-card>
-        </v-flex>
-        <v-layout row wrap>
+    <div class="fill-height">
+        <v-container fluid fill-height justify-center>
+            <v-layout row justify-center align-center>
+                <v-flex xs6 mx-3 mt-2 elevation-2>
+                    <v-card color="teal" class="white--text">
+                        <v-layout row>
+                            <v-flex xs-5 py-1 justify-center>
+                                <v-img :src=this.user.picture height="125px" contain>
+                                </v-img>
+                                <v-layout row justify-center>
+                                    <v-btn color="teal accent-4" dark @click="changeImg = !changeImg">Change Image</v-btn>
+                                </v-layout>
+                            </v-flex>
+                            <v-dialog v-model="changeImg" max-width="500px">
+                                <v-card>
+                                    <v-card-title>
+                                        Update Profile Image
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-form ref="form" @submit.prevent="updateProfilePicture">
+                                            <v-text-field v-model="imgUrl" label="Image URL" required></v-text-field>
+                                            <v-btn type="submit" color="teal accent-4" class="white--text" @click="changeImg = false">
+                                                Submit
+                                            </v-btn>
+                                        </v-form>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-btn color="teal accent-4" flat @click="changeImg = false">Close</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                            <v-flex xs-7>
+                                <v-card-title primary-title style="justify-content: center;">
+                                    <div>
+                                        <div class="headline">Welcome, {{this.user.name}}</div>
+                                        <div>You have {{this.lends.length}} current lends</div>
+                                        <div>You have {{this.borrows.length}} current borrows</div>
+                                        <v-btn color="teal accent-4" dark @click="newLend = !newLend">New Lend</v-btn>
+                                    </div>
+                                </v-card-title>
+                            </v-flex>
+                        </v-layout>
+                        <v-divider light></v-divider>
+                        <v-card-actions class="pa-3">
+                            <v-flex>
+                                Your rating
+                                <v-rating v-model="rating" readonly color="orange"></v-rating>
+                            </v-flex>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+        <v-layout wrap>
             <!-- SNACKBAR STUFF -->
-            <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'"
-                :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
+            <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'"
+                :right="x === 'right'" :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
                 You have unread borrows!
                 <v-btn color="pink" flat @click="viewLends">
                     View
@@ -68,9 +74,11 @@
                             <v-text-field v-model="lendBorrower" label="Who Is This For?" required></v-text-field>
                             <!-- date picker -->
                             <v-flex xs12 sm6 md4>
-                                <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40" :return-value.sync="dateMenu" lazy transition="scale-transition"
-                                    offset-y full-width min-width="290px">
-                                    <v-text-field slot="activator" v-model="date" label="Due Date" prepend-icon="event" readonly></v-text-field>
+                                <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40"
+                                    :return-value.sync="dateMenu" lazy transition="scale-transition" offset-y
+                                    full-width min-width="290px">
+                                    <v-text-field slot="activator" v-model="date" label="Due Date" prepend-icon="event"
+                                        readonly></v-text-field>
                                     <v-date-picker v-model="date" no-title scrollable>
                                         <v-spacer></v-spacer>
                                         <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
@@ -112,6 +120,8 @@
                 </v-card>
             </v-dialog>
         </v-layout>
+
+        </v-container>
     </div>
 </template>
 
