@@ -74,22 +74,27 @@
     methods: {
       logout() {
         this.$store.dispatch('logout')
+        this.drawer = false
       },
 
       calendarPage() {
         this.$router.push('Calendar')
+        this.drawer = false
       },
 
       lendsPage() {
         this.$router.push('Lends')
+        this.drawer = false
       },
 
       profilePage() {
         this.$router.push('Profile')
+        this.drawer = false
       },
 
       searchUsers() {
         this.$router.push('SearchUsers')
+        this.drawer = false
       }
     }
   }
