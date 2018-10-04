@@ -2,7 +2,7 @@
     <div class="fill-height">
         <v-container fluid fill-height justify-center>
             <v-layout row justify-center align-center>
-                <v-flex xs6 mx-3 mt-2 elevation-2>
+                <v-flex xs12 md6 mx-3 mt-2 elevation-2>
                     <v-card color="teal" class="white--text">
                         <v-layout row>
                             <v-flex xs-5 py-1 justify-center>
