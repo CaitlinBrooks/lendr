@@ -43,7 +43,7 @@
         },
         steps: [
           {
-            target: '#username-field',  // We're using document.querySelector() under the hood
+            target: '#username-field',
             content: `Welcome to Lendr! We've set up an example account for you to easily explore all of Lendr's functionality!`,
             params: {
               placement: 'top'
