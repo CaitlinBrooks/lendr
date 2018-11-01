@@ -1,7 +1,7 @@
 # lendr
 
-<strong>Project Title</strong><br/>
-One Paragraph of project description goes here<br/>
+<strong>About</strong><br/>
+Lendr (pronounced Lender) is an app that allows users to note that they have lent an item to another user with an attached due date and a way to rate users based on various metrics.<br/>
 
 <strong>Getting Started</strong><br/>
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.<br/>
