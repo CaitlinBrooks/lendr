@@ -52,6 +52,7 @@ Jackson Gordon<br/>
 This project is licensed under the MIT License - see the LICENSE.md file for details<br/>
 
 <strong>Acknowledgments</strong><br/>
+Thank you to Christopher Brown for pulling the project down and peer reviewing and providing feedback for better UI/UX.</br>
 Hat tips<br/>
 Inspiration<br/>
 etc.<br/>
