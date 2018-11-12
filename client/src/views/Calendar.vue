@@ -39,10 +39,7 @@
     methods: {
       checkDate(date) {
         let today = new Date()
-        if (parseInt(date[5] + date[6]) < today.getMonth() + 1) {
-          return "red"
-        }
-        else if (parseInt(date[8] + date[9]) < today.getDate()) {
+        if (parseInt(date[5] + date[6]) < today.getMonth() + 1 && parseInt(date[8] + date[9]) < today.getDate()) {
           return "red"
         }
         else {
